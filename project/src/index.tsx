@@ -8,19 +8,19 @@ const RentCount = {
 
 const amsterdam = [
   {
-    prace: 3320
+    price: 3320
   },
   {
-    prace: 340
+    price: 340
   },
   {
-    prace: 180
+    price: 180
   },
   {
-    prace: 220
+    price: 220
   },
   {
-    prace: 160
+    price: 160
   }
 ];
 

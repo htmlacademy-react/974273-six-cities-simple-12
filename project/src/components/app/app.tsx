@@ -7,7 +7,7 @@ import MainFull from '../../pages/main-full/main-full';
 
 type AppMainBodyProps = {
   totalNumberOffers: number;
-  rentAmsterdam: { prace: number }[];
+  rentAmsterdam: { price: number }[];
 }
 
 function App(props: AppMainBodyProps): JSX.Element {
