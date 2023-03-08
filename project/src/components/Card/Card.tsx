@@ -1,7 +1,4 @@
-
-type CardProps = {
-  priceCard: number;
-}
+import { CardProps } from '../../types/type-store';
 
 function Card({ priceCard }: CardProps): JSX.Element {
   return (
