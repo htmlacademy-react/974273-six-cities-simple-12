@@ -1,4 +1,4 @@
-
+import { Helmet } from 'react-helmet-async';
 import { AppMainBodyProps } from '../../types/type-store';
 import Card from '../../components/Card/Card';
 import MainMenu from '../../components/main-menu/main-menu';
@@ -9,6 +9,9 @@ function MainFull(props: AppMainBodyProps): JSX.Element {
 
   return (
     <main className="page__main page__main--index">
+      <Helmet>
+        <title>Six cities - Main</title>
+      </Helmet>
       <h1 className="visually-hidden">Cities</h1>
       <MainMenu />
       <div className="cities">

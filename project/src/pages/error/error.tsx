@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { Helmet } from 'react-helmet-async';
 import './error.css';
 
 function Error(): JSX.Element {
@@ -51,6 +52,9 @@ function Error(): JSX.Element {
 
   return (
     <div className='error-body'>
+      <Helmet>
+        <title>Six cities - ERROR</title>
+      </Helmet>
       <h1>
         <a href='/'>НАЖМИ ДЛЯ ПЕРЕХОДА НА ГЛАВНУЮ СТРАНИЦУ!!!</a>
       </h1>

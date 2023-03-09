@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 
 function Login() {
 
@@ -5,6 +6,9 @@ function Login() {
 
   return (
     <main className="page__main page__main--login">
+      <Helmet>
+        <title>Six cities - Sign In</title>
+      </Helmet>
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>

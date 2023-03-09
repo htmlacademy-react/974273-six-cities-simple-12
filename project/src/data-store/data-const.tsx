@@ -28,3 +28,9 @@ export enum AppRoute {
   PrivateOffice = '/private',
   NoPlace = '/no-place'
 }
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
