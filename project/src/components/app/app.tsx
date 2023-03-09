@@ -5,31 +5,17 @@ import { AppRoute } from '../../data-store/data-const';
 import MainFull from '../../pages/main-full/main-full';
 import Room from '../../pages/room/room';
 import Login from '../../pages/login/login';
-import PrivateOffice from '../../pages/private-office/private-office';
-import NoPlace from '../../pages/no-place/no-place';
 import Error from '../../pages/error/error';
-import HeaderLayout from '../header-layout/header-layout';
-import MainMenuLayout from '../main-menu-layout/main-menu-layout';
+import Layout from '../layout/layout';
 
 function App(props: AppMainBodyProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<HeaderLayout />}>
-          <Route element={<MainMenuLayout />} >
-            <Route
-              // path={AppRoute.Main}
-              index
-              element={<MainFull totalNumberOffers={props.totalNumberOffers} rentAmsterdam={props.rentAmsterdam} />}
-            />
-            <Route
-              path={AppRoute.NoPlace}
-              element={<NoPlace />}
-            />
-          </Route>
+        <Route path={AppRoute.Main} element={<Layout />}>
           <Route
-            path={AppRoute.PrivateOffice}
-            element={<PrivateOffice />}
+            index
+            element={<MainFull totalNumberOffers={props.totalNumberOffers} rentAmsterdam={props.rentAmsterdam} />}
           />
           <Route
             path={AppRoute.Room}

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-function MainMenuLayout() {
+function MainMenu() {
   return (
     <>
       <div className="tabs">
@@ -44,4 +44,4 @@ function MainMenuLayout() {
   );
 }
 
-export default MainMenuLayout;
+export default MainMenu;

@@ -52,7 +52,7 @@ function Error(): JSX.Element {
   return (
     <div className='error-body'>
       <h1>
-        <a href='/'>ПЕРЕЙДИТЕ НА ГЛАВНУЮ СТРАНИЦУ!!!</a>
+        <a href='/'>НАЖМИ ДЛЯ ПЕРЕХОДА НА ГЛАВНУЮ СТРАНИЦУ!!!</a>
       </h1>
       <svg id="mainSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" >
         <defs>

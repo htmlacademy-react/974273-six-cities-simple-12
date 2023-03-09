@@ -1,6 +1,7 @@
 
 import { AppMainBodyProps } from '../../types/type-store';
 import Card from '../../components/card/card';
+import MainMenu from '../../components/main-menu/main-menu';
 
 function MainFull(props: AppMainBodyProps): JSX.Element {
 
@@ -9,7 +10,7 @@ function MainFull(props: AppMainBodyProps): JSX.Element {
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
-
+      <MainMenu />
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
