@@ -1,11 +1,60 @@
+import { gsap } from 'gsap';
+import './error.css';
 
 function Error(): JSX.Element {
+
+  gsap.set('.large', {
+    scale: 1.021,
+    transformOrigin: '50% 50%'
+  });
+
+  function updatePos() {
+    gsap.set('.large', {
+      opacity: 'random(0.7, 0.9)',
+    });
+
+    gsap.set('.largeMask', {
+      x: 'random(50, 600)',
+      y: 'random(100, 500)',
+
+      attr: {
+        width: 'random(4, 190)',
+        height: 'random(1, 40)',
+      }
+    });
+
+    const delay = gsap.utils.random(0, 0.1035);
+
+    gsap.delayedCall(delay, updatePos);
+
+    gsap.to('.small', {
+      opacity: 'random(0.7, 1)',
+      repeat: 1,
+      yoyo: true,
+      duration: delay,
+      x: 'random(1, -1)',
+      y: 'random(-1, 1)',
+      skewX: 'random(2, -1)',
+      ease: 'steps(1)',
+      transformOrigin: '50% 50%'
+
+    });
+  }
+
+  gsap.to('#linesMask g', {
+    y: '-=2',
+    repeat: -1,
+    ease: 'none'
+  });
+
+  updatePos();
+
   return (
-    <>
-      <h1 style={{ textAlign: 'center' }}>
+    <div className='error-body'>
+      <h1>
         <a href='/'>ПЕРЕЙДИТЕ НА ГЛАВНУЮ СТРАНИЦУ!!!</a>
       </h1>
-      <svg style={{ height: '500px', width: '100%' }} id="mainSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" >
+      <svg id="mainSVG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" >
         <defs>
           <g id="warning" fill="#ED4206">
             <g id="error">
@@ -121,7 +170,7 @@ function Error(): JSX.Element {
           <use className="large" href="#warning" />
         </g>
       </svg >
-    </>
+    </div>
   );
 }
 
