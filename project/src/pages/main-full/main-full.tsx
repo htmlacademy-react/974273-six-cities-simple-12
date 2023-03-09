@@ -1,6 +1,6 @@
 
 import { AppMainBodyProps } from '../../types/type-store';
-import Card from '../../components/card/card';
+import Card from '../../components/Card/Card';
 import MainMenu from '../../components/main-menu/main-menu';
 
 function MainFull(props: AppMainBodyProps): JSX.Element {
