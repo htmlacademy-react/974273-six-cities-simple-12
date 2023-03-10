@@ -1,7 +1,11 @@
+import { Helmet } from 'react-helmet-async';
 
 function Room() {
   return (
     <main className="page__main page__main--property">
+      <Helmet>
+        <title>Six cities - Room</title>
+      </Helmet>
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">

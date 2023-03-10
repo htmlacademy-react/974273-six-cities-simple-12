@@ -1,0 +1,30 @@
+.error-body {
+	background-color: #323031;
+	overflow: hidden;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.error-body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+svg {
+	height: 90vh;
+	visibility: visible;
+}
+
+h1 {
+	display: inline-block;
+	width: 100%;
+}
+
+a {
+	color: red;
+}
