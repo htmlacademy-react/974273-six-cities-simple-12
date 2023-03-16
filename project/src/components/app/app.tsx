@@ -18,7 +18,7 @@ function App(props: AppMainBodyProps): JSX.Element {
           <Route path={AppRoute.Main} element={<Layout />}>
             <Route
               index
-              element={<MainFull totalNumberOffers={props.totalNumberOffers} rentAmsterdam={props.rentAmsterdam} />}
+              element={<MainFull totalNumberOffers={props.totalNumberOffers} rentListRoom={props.rentListRoom} />}
             />
             <Route
               path={AppRoute.Room}
@@ -28,7 +28,7 @@ function App(props: AppMainBodyProps): JSX.Element {
               path={AppRoute.Login}
               element={
                 <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth} >
-                  <MainFull totalNumberOffers={props.totalNumberOffers} rentAmsterdam={props.rentAmsterdam} />
+                  <MainFull totalNumberOffers={props.totalNumberOffers} rentListRoom={props.rentListRoom} />
                 </PrivateRoute>
               }
             />
