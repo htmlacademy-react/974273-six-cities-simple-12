@@ -1,11 +1,11 @@
 import { Helmet } from 'react-helmet-async';
 import { AppMainBodyProps } from '../../types/type-store';
-import Card from '../../components/Card/Card';
 import MainMenu from '../../components/main-menu/main-menu';
+import CardList from '../../components/card-list/card-list';
 
 function MainFull(props: AppMainBodyProps): JSX.Element {
 
-  const { totalNumberOffers, rentAmsterdam } = props;
+  const { totalNumberOffers, rentListRoom } = props;
 
   return (
     <main className="page__main page__main--index">
@@ -28,9 +28,7 @@ function MainFull(props: AppMainBodyProps): JSX.Element {
                 </svg>
               </span>
             </form>
-            <div className="cities__places-list places__list tabs__content">
-              {rentAmsterdam.map((item) => <Card key={item.price} priceCard={item.price} />)}
-            </div>
+            <CardList listRooms={rentListRoom} />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map"></section>
