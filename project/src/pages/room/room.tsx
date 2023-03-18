@@ -4,26 +4,28 @@ import FormWithComment from '../../components/form-with-comment/form-with-commen
 import ImageListRoom from '../../components/image-list-room/image-list-room';
 import PremiumRoomFlag from '../../components/premium-room-flag/premium-room-flag';
 import TechnicListRoom from '../../components/technick-lisl-room/tichnick-list-room';
-import { amsterdam } from '../../mocks/offers';
+import { offers } from '../../mocks/offers';
+import { CardProps } from '../../types/type-store';
 
 function Room(): JSX.Element {
 
   const { id } = useParams();
-  const dataRoom = amsterdam.find((elem) => elem.id === Number(id));
-  const imageListRoom = dataRoom?.images;
-  const technicListRoom = dataRoom?.goods;
-  const hostRoom = dataRoom?.host;
+  const dataRoom: CardProps = offers.find((elem) => elem.id === Number(id))!;
+  const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = dataRoom;
+  const { avatarUrl, name, isPro } = host;
+  // const goods = dataRoom?.goods;
+  // const hostRoom = dataRoom?.host;
 
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        <ImageListRoom listRoom={imageListRoom} />
+        <ImageListRoom listRoom={images} />
         <div className="property__container container">
           <div className="property__wrapper">
-            {dataRoom?.isPremium ? <PremiumRoomFlag /> : null}
+            {isPremium ? <PremiumRoomFlag /> : null}
             <div className="property__name-wrapper">
               <h1 className="property__name">
-                {dataRoom?.title}
+                {title}
               </h1>
             </div>
             <div className="property__rating rating">
@@ -31,38 +33,38 @@ function Room(): JSX.Element {
                 <span style={{ width: '80%' }}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
-              <span className="property__rating-value rating__value">{dataRoom?.rating}</span>
+              <span className="property__rating-value rating__value">{rating}</span>
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
                 Apartment
               </li>
               <li className="property__feature property__feature--bedrooms">
-                {dataRoom?.bedrooms}
+                {bedrooms}
               </li>
               <li className="property__feature property__feature--adults">
-                Max {dataRoom?.maxAdults} adults
+                Max {maxAdults} adults
               </li>
             </ul>
             <div className="property__price">
-              <b className="property__price-value">&euro;{dataRoom?.price}</b>
+              <b className="property__price-value">&euro;{price}</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
-            <TechnicListRoom listRoom={technicListRoom} />
+            <TechnicListRoom listRoom={goods} />
             <div className="property__host">
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src={hostRoom?.avatarUrl} width="74" height="74" alt="Host avatar" />
+                  <img className="property__avatar user__avatar" src={avatarUrl} width="74" height="74" alt="Host avatar" />
                 </div>
                 <span className="property__user-name">
-                  {hostRoom?.name}
+                  {name}
                 </span>
-                {hostRoom?.isPro ? <span className="property__user-status">Pro</span> : null}
+                {isPro ? <span className="property__user-status">Pro</span> : null}
               </div>
               <div className="property__description">
                 <p className="property__text">
-                  {dataRoom?.description}
+                  {description}
                 </p>
               </div>
             </div>

@@ -12,9 +12,21 @@ export type Host = {
   name: string;
 }
 
+export type Location = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
+export type City = {
+  location: Location;
+  name: string;
+}
+
 export type CardProps = {
-  id: number;
+  id?: number;
   bedrooms: number;
+  city: City;
   maxAdults: number;
   goods: string[];
   host: Host;
@@ -24,6 +36,7 @@ export type CardProps = {
   description: string;
   previewImage: string;
   isPremium: boolean;
+  location: Location;
   price: number;
   rating: number;
 }

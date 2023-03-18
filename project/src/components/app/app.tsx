@@ -10,7 +10,7 @@ import Error from '../../pages/error/error';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privet-route/privet-route';
 
-function App(props: AppMainBodyProps): JSX.Element {
+function App({ totalNumberOffers, rentListRoom }: AppMainBodyProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -18,7 +18,7 @@ function App(props: AppMainBodyProps): JSX.Element {
           <Route path={AppRoute.Main} element={<Layout />}>
             <Route
               index
-              element={<MainFull totalNumberOffers={props.totalNumberOffers} rentListRoom={props.rentListRoom} />}
+              element={<MainFull totalNumberOffers={totalNumberOffers} rentListRoom={rentListRoom} />}
             />
             <Route
               path={AppRoute.Room}
@@ -28,7 +28,7 @@ function App(props: AppMainBodyProps): JSX.Element {
               path={AppRoute.Login}
               element={
                 <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth} >
-                  <MainFull totalNumberOffers={props.totalNumberOffers} rentListRoom={props.rentListRoom} />
+                  <MainFull totalNumberOffers={totalNumberOffers} rentListRoom={rentListRoom} />
                 </PrivateRoute>
               }
             />
