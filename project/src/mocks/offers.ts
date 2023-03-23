@@ -7,7 +7,7 @@ export const offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -35,8 +35,8 @@ export const offers = [
     previewImage: 'https://i.pravatar.cc/128',
     isPremium: true,
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 10
     },
     price: 320,
@@ -49,9 +49,9 @@ export const offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
-      name: 'Paris'
+      name: 'Amsterdam'
     },
     maxAdults: 4,
     goods: [
@@ -72,8 +72,8 @@ export const offers = [
     previewImage: 'https://i.pravatar.cc/128',
     isPremium: false,
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
       zoom: 10
     },
     price: 340,
@@ -86,9 +86,9 @@ export const offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
-      name: 'Cologne'
+      name: 'Amsterdam'
     },
     maxAdults: 4,
     goods: [
@@ -111,8 +111,8 @@ export const offers = [
     previewImage: 'https://i.pravatar.cc/128',
     isPremium: true,
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
       zoom: 10
     },
     price: 180,
@@ -125,7 +125,7 @@ export const offers = [
       location: {
         latitude: 52.370216,
         longitude: 4.895168,
-        zoom: 10
+        zoom: 12
       },
       name: 'Amsterdam'
     },
@@ -148,8 +148,45 @@ export const offers = [
     previewImage: 'https://i.pravatar.cc/128',
     isPremium: true,
     location: {
-      latitude: 52.370216,
-      longitude: 4.895168,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 10
+    },
+    price: 220,
+    rating: 5
+  },
+  {
+    id: 4,
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 12
+      },
+      name: 'Paris'
+    },
+    maxAdults: 4,
+    goods: [
+      'Heating'
+    ],
+    host: {
+      avatarUrl: 'https://i.pravatar.cc/128',
+      id: 3,
+      isPro: true,
+      name: 'Brussels'
+    },
+    type: 'hotel',
+    title: 'Beautiful &amp; luxurious apartment at great location',
+    images: [
+      'img/apartment-02.jpg'
+    ],
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Brussels.',
+    previewImage: 'https://i.pravatar.cc/128',
+    isPremium: true,
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
       zoom: 10
     },
     price: 220,

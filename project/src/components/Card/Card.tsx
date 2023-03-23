@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CardDataObject } from '../../types/type-store';
+import Error from '../../pages/error/error';
 
 function roundUp(n: number) {
   return Math.round(n);
@@ -9,10 +10,14 @@ function Card({ dataRoom, onMouseOverHandler }: CardDataObject): JSX.Element {
 
   const { id, images, price, rating, title, type } = dataRoom;
 
+  if (!id) {
+    return <Error />;
+  }
+
   return (
-    <article className="cities__card place-card" onMouseOver={() => onMouseOverHandler(id!)}>
+    <article className="cities__card place-card" onMouseOver={() => onMouseOverHandler(id)}>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/${id!}`}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={images[0]} width="260" height="200" alt="Room" />
         </Link>
       </div>
@@ -30,7 +35,7 @@ function Card({ dataRoom, onMouseOverHandler }: CardDataObject): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id!}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

@@ -2,10 +2,15 @@ import { Helmet } from 'react-helmet-async';
 import { AppMainBodyProps } from '../../types/type-store';
 import MainMenu from '../../components/main-menu/main-menu';
 import CardList from '../../components/card-list/card-list';
+import Map from '../../components/map/map';
 
 function MainFull(props: AppMainBodyProps): JSX.Element {
 
   const { totalNumberOffers, rentListRoom } = props;
+  const city = 'Amsterdam';
+  const roomsCitiRend = rentListRoom.filter((room) => room.city.name === city);
+  const cityCoord = roomsCitiRend[0].city;
+  // console.log('🚀 ~ file: main-full.tsx:13 ~ MainFull ~ cityCoord:', cityCoord);
 
   return (
     <main className="page__main page__main--index">
@@ -28,10 +33,10 @@ function MainFull(props: AppMainBodyProps): JSX.Element {
                 </svg>
               </span>
             </form>
-            <CardList listRooms={rentListRoom} />
+            <CardList listRooms={roomsCitiRend} />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map city={cityCoord} points={roomsCitiRend} />
           </div>
         </div>
       </div>
