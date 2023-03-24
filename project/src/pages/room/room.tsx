@@ -1,5 +1,5 @@
 
-import { useParams } from 'react-router-dom';
+import { Params, useParams } from 'react-router-dom';
 import FormWithComment from '../../components/form-with-comment/form-with-comment';
 import ImageListRoom from '../../components/image-list-room/image-list-room';
 import PremiumRoomFlag from '../../components/premium-room-flag/premium-room-flag';
@@ -9,12 +9,15 @@ import { CardProps } from '../../types/type-store';
 
 function Room(): JSX.Element {
 
-  const { id } = useParams();
-  const dataRoom: CardProps = offers.find((elem) => elem.id === Number(id))!;
+  const { id } = useParams<Params>();
+  const dataRoom: CardProps | undefined = offers.find((elem) => elem.id === Number(id));
+
+  if (!dataRoom) {
+    return <>Page not Faind</>;
+  }
+
   const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = dataRoom;
   const { avatarUrl, name, isPro } = host;
-  // const goods = dataRoom?.goods;
-  // const hostRoom = dataRoom?.host;
 
   return (
     <main className="page__main page__main--property">

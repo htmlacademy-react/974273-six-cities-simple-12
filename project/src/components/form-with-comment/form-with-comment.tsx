@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import StarRating from '../star/star-rating';
 
 function FormWithComment(): JSX.Element {
@@ -8,15 +8,15 @@ function FormWithComment(): JSX.Element {
     review: '',
   });
 
-  // function choosingStar(event: React.FormEvent<HTMLInputElement>) {
+  const [isDisabled, setDisabled] = useState(true);
 
-  //   const { name, value } = event.target as HTMLInputElement;
-
-  //   setDataForm({
-  //     ...dataForm,
-  //     [name]: value,
-  //   });
-  // }
+  useEffect(() => {
+    if ((dataForm.review.length > 50) && Number(dataForm.rating) > 0) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [dataForm.rating, dataForm.review]);
 
   function fieldChangeHeandle(event: React.FormEvent<HTMLTextAreaElement> | React.FormEvent<HTMLInputElement>): void {
 
@@ -39,7 +39,7 @@ function FormWithComment(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabled}>Submit</button>
       </div>
     </form>
   );
