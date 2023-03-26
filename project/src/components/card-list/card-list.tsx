@@ -8,7 +8,7 @@ function CardList({ listRooms }: ListRoomsProps): JSX.Element {
   const [activeId, setActiveId] = useState(ZERO_ID);
 
   return (
-    <div className="cities__places-list places__list tabs__content" id={String(activeId)}>
+    <div className="near-places__list places__list tabs__content" id={String(activeId)}>
       {listRooms.map((item) => <Card key={item.id} dataRoom={item} onMouseOverHandler={(idNumber: number) => setActiveId(idNumber)} idActive={activeId} />)}
     </div>
   );

@@ -10,7 +10,6 @@ function MainFull(props: AppMainBodyProps): JSX.Element {
   const city = 'Amsterdam';
   const roomsCitiRend = rentListRoom.filter((room) => room.city.name === city);
   const cityCoord = roomsCitiRend[0].city;
-  // console.log('🚀 ~ file: main-full.tsx:13 ~ MainFull ~ cityCoord:', cityCoord);
 
   return (
     <main className="page__main page__main--index">
@@ -36,7 +35,7 @@ function MainFull(props: AppMainBodyProps): JSX.Element {
             <CardList listRooms={roomsCitiRend} />
           </section>
           <div className="cities__right-section">
-            <Map city={cityCoord} points={roomsCitiRend} />
+            <Map city={cityCoord} points={roomsCitiRend} isMapBig={false} />
           </div>
         </div>
       </div>

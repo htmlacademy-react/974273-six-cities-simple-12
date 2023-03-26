@@ -146,7 +146,7 @@ export const offers = [
     ],
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Brussels.',
     previewImage: 'https://i.pravatar.cc/128',
-    isPremium: true,
+    isPremium: false,
     location: {
       latitude: 52.3809553943508,
       longitude: 4.939309666406198,
@@ -156,7 +156,7 @@ export const offers = [
     rating: 5
   },
   {
-    id: 4,
+    id: 5,
     bedrooms: 3,
     city: {
       location: {
