@@ -3,23 +3,11 @@ import 'leaflet/dist/leaflet.css';
 import { useRef, useEffect } from 'react';
 import { URL_MARKER_DEFAULT } from '../../data-store/data-const';
 import useMap from '../../hooks/useMap';
-import { CardProps } from '../../types/type-store';
+import { MapProps } from '../../types/type-store';
+import cn from 'classnames';
 
-export type CityCoordsProp = {
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-  name: string;
-}
+function Map({ city, points, isMapBig }: MapProps): JSX.Element {
 
-type MapProps = {
-  city: CityCoordsProp;
-  points: CardProps[];
-}
-
-function Map({ city, points }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -50,7 +38,11 @@ function Map({ city, points }: MapProps): JSX.Element {
 
   return (
     <section
-      className="cities__map map"
+      className={cn(
+        { 'property__map': isMapBig },
+        { 'cities__map': !isMapBig },
+        'map'
+      )}
       ref={mapRef}
     >
     </section>

@@ -64,3 +64,39 @@ export type StarProps = {
   choosingStar: (e: React.FormEvent<HTMLInputElement>) => void;
   numberId: number;
 }
+
+export type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
+}
+
+export type ReviewProps = {
+  review: Review;
+}
+
+export type ReviewListProps = {
+  reviews: Review[];
+}
+
+export type CityCoordsProp = {
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  name: string;
+}
+
+export type MapProps = {
+  city: CityCoordsProp;
+  points: CardProps[];
+  isMapBig: boolean;
+}
