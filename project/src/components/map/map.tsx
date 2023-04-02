@@ -29,6 +29,10 @@ function Map({ points, isMapBig }: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
+      map.setView({
+        lat: cityCenter.location.latitude,
+        lng: cityCenter.location.longitude,
+      });
       points.forEach((point) => {
         leaflet.marker({
           lat: point.location.latitude,

@@ -4,13 +4,14 @@ import { useAppSelector } from '../../hooks';
 
 function MainFull() {
 
-  const roomsCitiRend = useAppSelector((state) => state.offers);
+  const rentRoomsCity = useAppSelector((state) => state.offers);
+  const cityName = useAppSelector((state) => state.city);
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{roomsCitiRend.length} places to stay in Amsterdam</b>
+        <b className="places__found">{rentRoomsCity.length} places to stay in {cityName}</b>
         <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by</span>
           <span className="places__sorting-type" tabIndex={0}>
@@ -20,10 +21,10 @@ function MainFull() {
             </svg>
           </span>
         </form>
-        <CardList listRooms={roomsCitiRend} />
+        <CardList listRooms={rentRoomsCity} />
       </section>
       <div className="cities__right-section">
-        <Map points={roomsCitiRend} isMapBig={false} />
+        <Map points={rentRoomsCity} isMapBig={false} />
       </div>
     </div>
   );
