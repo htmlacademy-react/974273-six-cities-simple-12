@@ -160,8 +160,8 @@ export const offers = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 52.470216,
+        longitude: 4.855168,
         zoom: 12
       },
       name: 'Paris'
@@ -185,8 +185,45 @@ export const offers = [
     previewImage: 'https://i.pravatar.cc/128',
     isPremium: true,
     location: {
-      latitude: 52.3809553943508,
+      latitude: 52.4809553943508,
       longitude: 4.939309666406198,
+      zoom: 10
+    },
+    price: 220,
+    rating: 5
+  },
+  {
+    id: 6,
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 52.470216,
+        longitude: 4.855168,
+        zoom: 12
+      },
+      name: 'Paris'
+    },
+    maxAdults: 4,
+    goods: [
+      'Heating'
+    ],
+    host: {
+      avatarUrl: 'https://i.pravatar.cc/128',
+      id: 3,
+      isPro: true,
+      name: 'Brussels'
+    },
+    type: 'hotel',
+    title: 'Beautiful &amp; luxurious apartment at great location',
+    images: [
+      'img/apartment-02.jpg'
+    ],
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Brussels.',
+    previewImage: 'https://i.pravatar.cc/128',
+    isPremium: true,
+    location: {
+      latitude: 52.4909553943508,
+      longitude: 4.85309666406198,
       zoom: 10
     },
     price: 220,

@@ -5,18 +5,19 @@ import ImageListRoom from '../../components/image-list-room/image-list-room';
 import PremiumRoomFlag from '../../components/premium-room-flag/premium-room-flag';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import TechnicListRoom from '../../components/technick-lisl-room/tichnick-list-room';
-import { offers } from '../../mocks/offers';
 import { reviews } from '../../mocks/reviews';
 import { CardProps } from '../../types/type-store';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
+import { useAppSelector } from '../../hooks';
 
 function Room(): JSX.Element {
 
+  const offersRoom = useAppSelector((state) => state.offers);
+
   const { id } = useParams<Params>();
-  const dataRoom: CardProps | undefined = offers.find((elem) => elem.id === Number(id));
-  const dataRoomsOnNeighbourhood = offers.filter((elem) => elem.id !== Number(id)).slice(0, 3);
-  const cityCoord = dataRoomsOnNeighbourhood[0].city;
+  const dataRoom: CardProps | undefined = offersRoom.find((elem) => elem.id === Number(id));
+  const dataRoomsOnNeighbourhood = offersRoom.filter((elem) => elem.id !== Number(id)).slice(0, 3);
 
   if (!dataRoom) {
     return <>Page not Faind</>;
@@ -84,7 +85,7 @@ function Room(): JSX.Element {
             </section>
           </div>
         </div>
-        <Map city={cityCoord} points={dataRoomsOnNeighbourhood} isMapBig />
+        <Map points={dataRoomsOnNeighbourhood} isMapBig />
       </section>
       <div className="container">
         <section className="near-places places">

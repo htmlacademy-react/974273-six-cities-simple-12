@@ -5,11 +5,15 @@ import { URL_MARKER_DEFAULT } from '../../data-store/data-const';
 import useMap from '../../hooks/useMap';
 import { MapProps } from '../../types/type-store';
 import cn from 'classnames';
+// import { useAppSelector } from '../../hooks';
 
-function Map({ city, points, isMapBig }: MapProps): JSX.Element {
+function Map({ points, isMapBig }: MapProps): JSX.Element {
+
+  // const points = useAppSelector((state) => state.offers);
+  const cityCenter = points[0].city;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, cityCenter);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -25,6 +29,10 @@ function Map({ city, points, isMapBig }: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
+      map.setView({
+        lat: cityCenter.location.latitude,
+        lng: cityCenter.location.longitude,
+      });
       points.forEach((point) => {
         leaflet.marker({
           lat: point.location.latitude,
@@ -34,7 +42,7 @@ function Map({ city, points, isMapBig }: MapProps): JSX.Element {
         }).addTo(map);
       });
     }
-  }, [map, points]);
+  }, [map, points, isMapBig, defaultCustomIcon, cityCenter]);
 
   return (
     <section
