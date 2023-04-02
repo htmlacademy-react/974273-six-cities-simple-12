@@ -96,7 +96,12 @@ export type CityCoordsProp = {
 }
 
 export type MapProps = {
-  city: CityCoordsProp;
+  city?: CityCoordsProp;
   points: CardProps[];
   isMapBig: boolean;
+}
+
+export type CityItemProps = {
+  city: string;
+  clickCity(city: string): void;
 }
