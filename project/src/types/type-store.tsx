@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../data-store/data-const';
+import { AuthorizationStatus } from '../data-store/data-variables';
 
 export type AppMainBodyProps = {
   totalNumberOffers: number;

@@ -2,16 +2,19 @@ import { Helmet } from 'react-helmet-async';
 import MainEmpty from '../../components/main-empty/main-empty';
 import MainMenu from '../../components/main-menu/main-menu';
 import MainFull from '../../components/main-full/main-full';
-// import CardList from '../../components/card-list/card-list';
-// import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
+import cn from 'classnames';
 
 function Main(): JSX.Element {
 
   const roomsCitiRend = useAppSelector((state) => state.offers);
 
   return (
-    <main className="page__main page__main--index">
+    <main className={cn(
+      'page--main page__main--index',
+      { 'page__main--index-empty': roomsCitiRend.length === 0 }
+    )}
+    >
       <Helmet>
         <title>Six cities - Main</title>
       </Helmet>

@@ -1,5 +1,5 @@
 import { PrivateRouteProps } from '../../types/type-store';
-import { AuthorizationStatus } from '../../data-store/data-const';
+import { AuthorizationStatus } from '../../data-store/data-variables';
 import Login from '../../pages/login/login';
 
 function PrivateRoute(props: PrivateRouteProps) {
