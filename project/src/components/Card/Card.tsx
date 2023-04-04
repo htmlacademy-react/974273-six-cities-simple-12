@@ -1,20 +1,35 @@
 import { Link } from 'react-router-dom';
 import { CardDataObject } from '../../types/type-store';
+import { RATING_STEP, MARKER_OUT } from '../../data-store/data-const';
+import { useAppDispatch } from '../../hooks';
+import { changeColorMarker } from '../../store/actions';
 import Error from '../../pages/error/error';
-import { RATING_STEP } from '../../data-store/data-const';
 
-function Card({ dataRoom, onMouseOverHandler }: CardDataObject): JSX.Element {
+function Card({ dataRoom }: CardDataObject): JSX.Element {
 
   const { id, images, price, rating, title, type, isPremium } = dataRoom;
   const ratingProcent = rating * RATING_STEP;
 
+  const dispatch = useAppDispatch();
+
+  const onMouseOverHandler = () => {
+
+    const markerId = id;
+
+    dispatch(changeColorMarker({ markerId }));
+  };
+
+  const onMouseOutHandler = () => {
+    const markerId = MARKER_OUT;
+    dispatch(changeColorMarker({ markerId }));
+  };
 
   if (!id) {
     return <Error />;
   }
 
   return (
-    <article className="cities__card place-card" onMouseOver={() => onMouseOverHandler(id)}>
+    <article className="cities__card place-card" onMouseOver={onMouseOverHandler} onMouseOut={onMouseOutHandler} >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ' '}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>

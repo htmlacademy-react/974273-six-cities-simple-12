@@ -189,7 +189,7 @@ export const offers = [
       longitude: 4.939309666406198,
       zoom: 10
     },
-    price: 220,
+    price: 420,
     rating: 5
   },
   {
@@ -226,7 +226,7 @@ export const offers = [
       longitude: 4.85309666406198,
       zoom: 10
     },
-    price: 220,
-    rating: 5
+    price: 320,
+    rating: 4
   }
 ];
