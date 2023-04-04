@@ -3,17 +3,11 @@ import CardList from '../../components/card-list/card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isOpenSort } from '../../store/actions';
 import SortingOptions from '../sorting-options/sorting-options';
-// import { useState } from 'react';
 
 function MainFull() {
 
-  // const [sortOprions, setSortOptions] = useState(false);
   const opensortOprions = useAppSelector((state) => state.isOpenSort);
   const dispatch = useAppDispatch();
-
-  // function clickSortBy() {
-  //   setSortOptions(!sortOprions);
-  // }
 
   const clickSortBy = () => {
     dispatch(isOpenSort());

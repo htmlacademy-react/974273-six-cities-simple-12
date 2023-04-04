@@ -1,15 +1,16 @@
-import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useRef, useEffect } from 'react';
 import { URL_MARKER_DEFAULT } from '../../data-store/data-const';
-import useMap from '../../hooks/useMap';
 import { MapProps } from '../../types/type-store';
+import { useAppSelector } from '../../hooks';
+import leaflet from 'leaflet';
+import useMap from '../../hooks/useMap';
 import cn from 'classnames';
-// import { useAppSelector } from '../../hooks';
+import Marker from './marker.svg';
 
 function Map({ points, isMapBig }: MapProps): JSX.Element {
 
-  // const points = useAppSelector((state) => state.offers);
+  const markerColor = useAppSelector((state) => state.markerColor);
   const cityCenter = points[0].city;
 
   const mapRef = useRef(null);
@@ -20,12 +21,12 @@ function Map({ points, isMapBig }: MapProps): JSX.Element {
     iconSize: [40, 40],
     iconAnchor: [20, 40],
   });
-  // TODO: Добавить интерактивность маркеров для себя, для красоты.
-  // const currentCustomIcon = leaflet.icon({
-  //   iconUrl: URL_MARKER_CURRENT,
-  //   iconSize: [40, 40],
-  //   iconAnchor: [20, 40],
-  // });
+
+  const currentCustomIcon = leaflet.icon({
+    iconUrl: Marker,
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
 
   useEffect(() => {
     if (map) {
@@ -38,11 +39,11 @@ function Map({ points, isMapBig }: MapProps): JSX.Element {
           lat: point.location.latitude,
           lng: point.location.longitude
         }, {
-          icon: defaultCustomIcon,
+          icon: point.id === markerColor ? currentCustomIcon : defaultCustomIcon,
         }).addTo(map);
       });
     }
-  }, [map, points, isMapBig, defaultCustomIcon, cityCenter]);
+  }, [map, points, isMapBig, currentCustomIcon, defaultCustomIcon, cityCenter]);
 
   return (
     <section

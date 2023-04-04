@@ -24,7 +24,7 @@ export type City = {
 }
 
 export type CardProps = {
-  id?: number;
+  id: number;
   bedrooms: number;
   city: City;
   maxAdults: number;
@@ -48,8 +48,6 @@ export type PrivateRouteProps = {
 
 export type CardDataObject = {
   dataRoom: CardProps;
-  onMouseOverHandler(id: number): void;
-  idActive: number;
 };
 
 export type ListRoomsProps = {

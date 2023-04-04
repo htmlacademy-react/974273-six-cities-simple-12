@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
-import { chooseCity, chooseOption, isOpenSort } from './actions';
+import { chooseCity, chooseOption, isOpenSort, changeColorMarker } from './actions';
 import { RentSort } from '../data-store/data-variables';
+import { MARKER_OUT } from '../data-store/data-const';
 import { sortByMax, sortByMin } from '../utils/utils';
 
 const DATA_OFFERS_PARIS = offers.filter((offer) => offer.city.name === 'Paris').slice();
@@ -12,6 +13,7 @@ const initialState = {
   offers: DATA_OFFERS_PARIS,
   sortName: SORT_NAME,
   isOpenSort: false,
+  markerColor: MARKER_OUT,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -44,5 +46,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(isOpenSort, (state) => {
       state.isOpenSort = !state.isOpenSort;
+    })
+    .addCase(changeColorMarker, (state, action) => {
+      const { markerId } = action.payload;
+      state.markerColor = markerId;
     });
 });

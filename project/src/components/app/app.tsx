@@ -1,7 +1,5 @@
-// import React from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-// import { AppMainBodyProps } from '../../types/type-store';
 import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
 import Main from '../../pages/main/main';
 import Room from '../../pages/room/room';
