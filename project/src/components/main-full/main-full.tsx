@@ -13,7 +13,7 @@ function MainFull() {
     dispatch(isOpenSort());
   };
 
-  const rentRoomsCity = useAppSelector((state) => state.offers);
+  const rentRoomsCity = useAppSelector((state) => state.offersCity);
   const cityName = useAppSelector((state) => state.city);
   const sortName = useAppSelector((state) => state.sortName);
 

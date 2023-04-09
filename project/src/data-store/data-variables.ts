@@ -18,3 +18,7 @@ export enum RentSort {
 	PriceMin = 'Price: high to low',
 	RatingMax = 'Top rated first',
 }
+
+export enum APIRoute {
+	Hotels = '/hotels',
+}
