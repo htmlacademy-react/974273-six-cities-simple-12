@@ -1,19 +1,31 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { offers } from '../mocks/offers';
-import { chooseCity, chooseOption, isOpenSort, changeColorMarker } from './actions';
+import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus } from './actions';
 import { RentSort } from '../data-store/data-variables';
 import { MARKER_OUT } from '../data-store/data-const';
 import { sortByMax, sortByMin } from '../utils/utils';
+import { Offers } from '../types/type-store';
 
-const DATA_OFFERS_PARIS = offers.filter((offer) => offer.city.name === 'Paris').slice();
+const selectCity = (offers: Offers, city: string) => (offers.filter((offer) => offer.city.name === city).slice());
 const SORT_NAME = 'Popular';
 
-const initialState = {
+type InitialState = {
+  city: string;
+  offersCity: Offers;
+  sortName: string;
+  isOpenSort: boolean;
+  markerColor: number;
+  offers: Offers;
+  isHotelsDataLoading: boolean;
+}
+
+const initialState: InitialState = {
   city: 'Paris',
-  offers: DATA_OFFERS_PARIS,
+  offersCity: [],
   sortName: SORT_NAME,
   isOpenSort: false,
   markerColor: MARKER_OUT,
+  offers: [],
+  isHotelsDataLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -21,7 +33,7 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(chooseCity, (state, action) => {
       const { cityName } = action.payload;
       state.city = cityName;
-      state.offers = offers.filter((offer) => offer.city.name === cityName).slice();
+      state.offersCity = selectCity(state.offers, state.city);
       state.sortName = SORT_NAME;
       state.isOpenSort = false;
     })
@@ -29,17 +41,17 @@ export const reducer = createReducer(initialState, (builder) => {
       const { nameOption } = action.payload;
       state.sortName = nameOption;
       if (nameOption === SORT_NAME) {
-        state.offers = offers.filter((offer) => offer.city.name === state.city).slice();
+        state.offersCity = selectCity(state.offers, state.city);
       } else {
         switch (nameOption) {
           case RentSort.PriceMax:
-            state.offers = state.offers.sort((a, b) => sortByMax(a.price, b.price));
+            state.offersCity = state.offersCity.sort((a, b) => sortByMax(a.price, b.price));
             break;
           case RentSort.PriceMin:
-            state.offers = state.offers.sort((a, b) => sortByMin(a.price, b.price));
+            state.offersCity = state.offersCity.sort((a, b) => sortByMin(a.price, b.price));
             break;
           case RentSort.RatingMax:
-            state.offers = state.offers.sort((a, b) => sortByMin(a.rating, b.rating));
+            state.offersCity = state.offersCity.sort((a, b) => sortByMin(a.rating, b.rating));
             break;
         }
       }
@@ -50,5 +62,12 @@ export const reducer = createReducer(initialState, (builder) => {
     .addCase(changeColorMarker, (state, action) => {
       const { markerId } = action.payload;
       state.markerColor = markerId;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+      state.offersCity = selectCity(state.offers, state.city);
+    })
+    .addCase(setHotelsDataLoadingStatus, (state, action) => {
+      state.isHotelsDataLoading = action.payload;
     });
 });

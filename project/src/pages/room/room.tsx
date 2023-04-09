@@ -13,7 +13,7 @@ import { useAppSelector } from '../../hooks';
 
 function Room(): JSX.Element {
 
-  const offersRoom = useAppSelector((state) => state.offers);
+  const offersRoom = useAppSelector((state) => state.offersCity);
 
   const { id } = useParams<Params>();
   const dataRoom: CardProps | undefined = offersRoom.find((elem) => elem.id === Number(id));

@@ -3,12 +3,20 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
 import Main from '../../pages/main/main';
 import Room from '../../pages/room/room';
-
 import Error from '../../pages/error/error';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privet-route/privet-route';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 function App(): JSX.Element {
+
+  const isHotelsDataLoading = useAppSelector((state) => state.isHotelsDataLoading);
+
+  if (isHotelsDataLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>

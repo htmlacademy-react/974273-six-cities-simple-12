@@ -1,5 +1,7 @@
 import { AuthorizationStatus } from '../data-store/data-variables';
 
+export type Offers = CardProps[];
+
 export type AppMainBodyProps = {
   totalNumberOffers: number;
   rentListRoom: CardProps[];

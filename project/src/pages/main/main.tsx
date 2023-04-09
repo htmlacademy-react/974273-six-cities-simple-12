@@ -7,7 +7,7 @@ import cn from 'classnames';
 
 function Main(): JSX.Element {
 
-  const roomsCitiRend = useAppSelector((state) => state.offers);
+  const roomsCitiRend = useAppSelector((state) => state.offersCity);
 
   return (
     <main className={cn(
