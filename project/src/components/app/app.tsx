@@ -1,6 +1,6 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
+import { AppRoute } from '../../data-store/data-variables';
 import Main from '../../pages/main/main';
 import Room from '../../pages/room/room';
 import Error from '../../pages/error/error';
@@ -12,6 +12,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 function App(): JSX.Element {
 
   const isHotelsDataLoading = useAppSelector((state) => state.isHotelsDataLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   if (isHotelsDataLoading) {
     return <LoadingScreen />;
@@ -33,7 +34,7 @@ function App(): JSX.Element {
             <Route
               path={AppRoute.Login}
               element={
-                <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth} >
+                <PrivateRoute authorizationStatus={authorizationStatus} >
                   <Main />
                 </PrivateRoute>
               }

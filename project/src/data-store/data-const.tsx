@@ -11,3 +11,5 @@ export const URL_MARKER_DEFAULT =
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const MARKER_OUT = -1;
+
+export const TIMEOUT_SHOW_ERROR = 2000;
