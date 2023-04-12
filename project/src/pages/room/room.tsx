@@ -10,10 +10,12 @@ import { CardProps } from '../../types/type-store';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
+import { AuthorizationStatus } from '../../data-store/data-variables';
 
 function Room(): JSX.Element {
 
   const offersRoom = useAppSelector((state) => state.offersCity);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const { id } = useParams<Params>();
   const dataRoom: CardProps | undefined = offersRoom.find((elem) => elem.id === Number(id));
@@ -81,7 +83,7 @@ function Room(): JSX.Element {
             <section className="property__reviews reviews">
               <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
               <ReviewsList reviews={reviews} />
-              <FormWithComment />
+              {authorizationStatus === AuthorizationStatus.Auth ? <FormWithComment /> : ''}
             </section>
           </div>
         </div>

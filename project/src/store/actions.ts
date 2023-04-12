@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offers } from '../types/type-store';
+import { Offers, ResponseAuthorization } from '../types/type-store';
 import { AuthorizationStatus } from '../data-store/data-variables';
 
 export const chooseCity = createAction<{ cityName: string }>('city/chooseCity');
@@ -15,5 +15,7 @@ export const loadOffers = createAction<Offers>('data/loadOffers');
 export const setHotelsDataLoadingStatus = createAction<boolean>('data/setHotelsDataLoadingStatus');
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const responseAuthorization = createAction<ResponseAuthorization>('user/responseAuthorization');
 
 export const setError = createAction<string | null>('game/setError');

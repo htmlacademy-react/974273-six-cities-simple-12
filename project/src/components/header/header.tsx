@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import SignIn from '../sign-in/sign-in';
+import { useAppSelector } from '../../hooks';
+import SignOut from '../sign-out/sign-out';
+import { AuthorizationStatus } from '../../data-store/data-variables';
 
 function HeaderBody(): JSX.Element {
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <header className="header">
       <div className="container">
@@ -13,7 +19,7 @@ function HeaderBody(): JSX.Element {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <SignIn />
+              {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
             </ul>
           </nav>
         </div>
