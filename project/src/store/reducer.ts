@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus } from './actions';
-import { RentSort } from '../data-store/data-variables';
+import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization } from './actions';
+import { AuthorizationStatus, RentSort } from '../data-store/data-variables';
 import { MARKER_OUT } from '../data-store/data-const';
 import { sortByMax, sortByMin } from '../utils/utils';
-import { Offers } from '../types/type-store';
+import { Offers, ResponseAuthorization } from '../types/type-store';
 
 const selectCity = (offers: Offers, city: string) => (offers.filter((offer) => offer.city.name === city).slice());
 const SORT_NAME = 'Popular';
@@ -16,6 +16,9 @@ type InitialState = {
   markerColor: number;
   offers: Offers;
   isHotelsDataLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
+  error: string | null;
+  userAuthorization: ResponseAuthorization;
 }
 
 const initialState: InitialState = {
@@ -26,6 +29,16 @@ const initialState: InitialState = {
   markerColor: MARKER_OUT,
   offers: [],
   isHotelsDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  error: null,
+  userAuthorization: {
+    avatarUrl: '',
+    email: '',
+    id: 1,
+    isPro: false,
+    name: '',
+    token: '',
+  },
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -69,5 +82,14 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setHotelsDataLoadingStatus, (state, action) => {
       state.isHotelsDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(responseAuthorization, (state, action) => {
+      state.userAuthorization = action.payload;
     });
 });
