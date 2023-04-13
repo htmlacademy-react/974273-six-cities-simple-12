@@ -36,7 +36,8 @@ export const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<{ error: string }>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        processErrorHandle(error.response.data.error);
+        const massageError = error.response.status === 400 ? 'Ошибка авторизации, не хватает данных или произошел сбой запроса. ПОВТОРИТЕ ПОПЫТКУ.' : error.response.data.error;
+        processErrorHandle(massageError);
       }
       throw error;
     }
