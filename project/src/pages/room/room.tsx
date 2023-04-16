@@ -1,31 +1,30 @@
 
-import { Params, useParams } from 'react-router-dom';
 import FormWithComment from '../../components/form-with-comment/form-with-comment';
 import ImageListRoom from '../../components/image-list-room/image-list-room';
 import PremiumRoomFlag from '../../components/premium-room-flag/premium-room-flag';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import TechnicListRoom from '../../components/technick-lisl-room/tichnick-list-room';
-import { reviews } from '../../mocks/reviews';
-import { CardProps } from '../../types/type-store';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
-import { useAppSelector } from '../../hooks';
-import { AuthorizationStatus } from '../../data-store/data-variables';
+import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { redirectToRoute } from '../../store/actions';
 
 function Room(): JSX.Element {
 
-  const offersRoom = useAppSelector((state) => state.offersCity);
+  const dispatch = useAppDispatch();
+
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  const { id } = useParams<Params>();
-  const dataRoom: CardProps | undefined = offersRoom.find((elem) => elem.id === Number(id));
-  const dataRoomsOnNeighbourhood = offersRoom.filter((elem) => elem.id !== Number(id)).slice(0, 3);
+  const room = useAppSelector((state) => state.offer);
+  const comments = useAppSelector((state) => state.comments);
+  const roomsNearby = useAppSelector((state) => state.offersNearby);
 
-  if (!dataRoom) {
-    return <>Page not Faind</>;
+  if (!room || !comments || !roomsNearby) {
+    dispatch(redirectToRoute(AppRoute.Main));
   }
 
-  const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = dataRoom;
+  const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = room!;
   const { avatarUrl, name, isPro } = host;
 
   return (
@@ -81,18 +80,18 @@ function Room(): JSX.Element {
               </div>
             </div>
             <section className="property__reviews reviews">
-              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-              <ReviewsList reviews={reviews} />
+              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
+              <ReviewsList reviews={comments} />
               {authorizationStatus === AuthorizationStatus.Auth ? <FormWithComment /> : ''}
             </section>
           </div>
         </div>
-        <Map points={dataRoomsOnNeighbourhood} isMapBig />
+        <Map points={roomsNearby} isMapBig />
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <CardList listRooms={dataRoomsOnNeighbourhood} />
+          <CardList listRooms={roomsNearby} />
         </section>
       </div>
     </main>

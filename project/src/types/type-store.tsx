@@ -2,6 +2,10 @@ import { AuthorizationStatus } from '../data-store/data-variables';
 
 export type Offers = CardProps[];
 
+export type Offer = CardProps;
+
+export type Comments = Review[];
+
 export type ResponseAuthorization = {
   avatarUrl: string;
   email: string;
