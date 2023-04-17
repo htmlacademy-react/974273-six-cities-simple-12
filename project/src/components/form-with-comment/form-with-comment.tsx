@@ -1,7 +1,16 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import StarRating from '../star/star-rating';
+import { RatingData } from '../../types/rating-data';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Params, useParams } from 'react-router-dom';
+import { commentsAction } from '../../store/api-actions';
 
 function FormWithComment(): JSX.Element {
+
+  const dispatch = useAppDispatch();
+  const isDisabledSending = useAppSelector((state) => state.isSendingComment);
+  // const formRef = useRef<HTMLFormElement>(null);
+  const { id } = useParams<Params>();
 
   const [dataForm, setDataForm] = useState({
     rating: 0,
@@ -10,13 +19,19 @@ function FormWithComment(): JSX.Element {
 
   const [isDisabled, setDisabled] = useState(true);
 
+  // useEffect(() => {
+  //   if (isDisabledSending) {
+  //     formRef.current?.reset();
+  //   }
+  // }, [isDisabledSending]);
+
   useEffect(() => {
-    if ((dataForm.review.length > 50) && Number(dataForm.rating) > 0) {
+    if ((dataForm.review.length > 50) && Number(dataForm.rating) > 0 && isDisabledSending) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [dataForm.rating, dataForm.review]);
+  }, [dataForm.rating, dataForm.review, isDisabledSending]);
 
   function fieldChangeHeandle(event: React.FormEvent<HTMLTextAreaElement> | React.FormEvent<HTMLInputElement>): void {
 
@@ -28,8 +43,33 @@ function FormWithComment(): JSX.Element {
     });
   }
 
+  const onSubmit = (ratingData: RatingData) => {
+    dispatch(commentsAction(ratingData));
+    setDataForm({
+      rating: 0,
+      review: '',
+    });
+  };
+
+  const handleSubmitSend = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (dataForm.review.length > 50 && dataForm.rating !== 0) {
+      onSubmit({
+        id: String(id),
+        comment: dataForm.review,
+        rating: dataForm.rating,
+      });
+    }
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmitSend}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {Array.from(Array(5), (v, i) => (<StarRating key={i} choosingStar={fieldChangeHeandle} numberId={5 - i} />))}

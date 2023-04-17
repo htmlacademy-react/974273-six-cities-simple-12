@@ -27,3 +27,5 @@ export const responseAuthorization = createAction<ResponseAuthorization>('user/r
 export const setError = createAction<string | null>('game/setError');
 
 export const redirectToRoute = createAction<AppRoute>('route/redirectToRoute');
+
+export const setStatusSendingComment = createAction<boolean>('comment/setStatusSendingComment');

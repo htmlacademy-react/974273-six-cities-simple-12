@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization, loadOffer, loadOffersNearby, loadComments } from './actions';
+import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization, loadOffer, loadOffersNearby, loadComments, setStatusSendingComment } from './actions';
 import { AuthorizationStatus, RentSort } from '../data-store/data-variables';
 import { MARKER_OUT } from '../data-store/data-const';
 import { sortByMax, sortByMin } from '../utils/utils';
@@ -22,6 +22,7 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   error: string | null;
   userAuthorization: ResponseAuthorization;
+  isSendingComment: boolean;
 }
 
 const initialState: InitialState = {
@@ -45,6 +46,7 @@ const initialState: InitialState = {
     name: '',
     token: '',
   },
+  isSendingComment: true,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -106,5 +108,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(responseAuthorization, (state, action) => {
       state.userAuthorization = action.payload;
+    })
+    .addCase(setStatusSendingComment, (state, action) => {
+      state.isSendingComment = action.payload;
     });
 });

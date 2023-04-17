@@ -10,6 +10,7 @@ import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history/browser-history';
+import NotFound from '../../pages/error/error_404';
 
 function App(): JSX.Element {
 
@@ -45,6 +46,10 @@ function App(): JSX.Element {
           <Route
             path="*"
             element={<Error />}
+          />
+          <Route
+            path={AppRoute.Error_404}
+            element={<NotFound />}
           />
         </Routes>
       </HistoryRouter>

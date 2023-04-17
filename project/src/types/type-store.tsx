@@ -118,3 +118,8 @@ export type CityItemProps = {
   city: string;
   clickCity(city: string): void;
 }
+
+export interface IShippingFields {
+  rating: number;
+  comment: string;
+}
