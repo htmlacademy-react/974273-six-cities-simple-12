@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import StarRating from '../star/star-rating';
 import { RatingData } from '../../types/rating-data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -9,7 +9,7 @@ function FormWithComment(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const isDisabledSending = useAppSelector((state) => state.isSendingComment);
-  // const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const { id } = useParams<Params>();
 
   const [dataForm, setDataForm] = useState({
@@ -19,11 +19,12 @@ function FormWithComment(): JSX.Element {
 
   const [isDisabled, setDisabled] = useState(true);
 
-  // useEffect(() => {
-  //   if (isDisabledSending) {
-  //     formRef.current?.reset();
-  //   }
-  // }, [isDisabledSending]);
+  // NOTE: Очистка формы, а именно рейтинга
+  useEffect(() => {
+    if (isDisabledSending) {
+      formRef.current?.reset();
+    }
+  }, [isDisabledSending]);
 
   useEffect(() => {
     if ((dataForm.review.length > 50) && Number(dataForm.rating) > 0 && isDisabledSending) {
@@ -43,6 +44,7 @@ function FormWithComment(): JSX.Element {
     });
   }
 
+  // NOTE: Отравка данных и одновременно обнуление формы
   const onSubmit = (ratingData: RatingData) => {
     dispatch(commentsAction(ratingData));
     setDataForm({
@@ -69,6 +71,7 @@ function FormWithComment(): JSX.Element {
       action="#"
       method="post"
       onSubmit={handleSubmitSend}
+      ref={formRef}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
