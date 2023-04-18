@@ -2,6 +2,10 @@ import { AuthorizationStatus } from '../data-store/data-variables';
 
 export type Offers = CardProps[];
 
+export type Offer = CardProps;
+
+export type Comments = Review[];
+
 export type ResponseAuthorization = {
   avatarUrl: string;
   email: string;
@@ -113,4 +117,9 @@ export type MapProps = {
 export type CityItemProps = {
   city: string;
   clickCity(city: string): void;
+}
+
+export interface IShippingFields {
+  rating: number;
+  comment: string;
 }

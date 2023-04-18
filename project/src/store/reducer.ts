@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization } from './actions';
+import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization, loadOffer, loadOffersNearby, loadComments, setStatusSendingComment } from './actions';
 import { AuthorizationStatus, RentSort } from '../data-store/data-variables';
 import { MARKER_OUT } from '../data-store/data-const';
 import { sortByMax, sortByMin } from '../utils/utils';
-import { Offers, ResponseAuthorization } from '../types/type-store';
+import { Offers, Offer, ResponseAuthorization, Comments } from '../types/type-store';
 
 const selectCity = (offers: Offers, city: string) => (offers.filter((offer) => offer.city.name === city).slice());
 const SORT_NAME = 'Popular';
@@ -11,23 +11,30 @@ const SORT_NAME = 'Popular';
 type InitialState = {
   city: string;
   offersCity: Offers;
+  offersNearby: Offers;
+  comments: Comments;
   sortName: string;
   isOpenSort: boolean;
   markerColor: number;
   offers: Offers;
+  offer: Offer | null;
   isHotelsDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   error: string | null;
   userAuthorization: ResponseAuthorization;
+  isSendingComment: boolean;
 }
 
 const initialState: InitialState = {
   city: 'Paris',
   offersCity: [],
+  offersNearby: [],
+  comments: [],
   sortName: SORT_NAME,
   isOpenSort: false,
   markerColor: MARKER_OUT,
   offers: [],
+  offer: null,
   isHotelsDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
@@ -39,6 +46,7 @@ const initialState: InitialState = {
     name: '',
     token: '',
   },
+  isSendingComment: true,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -80,6 +88,15 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
       state.offersCity = selectCity(state.offers, state.city);
     })
+    .addCase(loadOffer, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(loadOffersNearby, (state, action) => {
+      state.offersNearby = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
     .addCase(setHotelsDataLoadingStatus, (state, action) => {
       state.isHotelsDataLoading = action.payload;
     })
@@ -91,5 +108,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(responseAuthorization, (state, action) => {
       state.userAuthorization = action.payload;
+    })
+    .addCase(setStatusSendingComment, (state, action) => {
+      state.isSendingComment = action.payload;
     });
 });

@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute } from '../../data-store/data-variables';
 import Main from '../../pages/main/main';
@@ -8,6 +8,9 @@ import Layout from '../layout/layout';
 import PrivateRoute from '../privet-route/privet-route';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history/browser-history';
+import NotFound from '../../pages/error/error_404';
 
 function App(): JSX.Element {
 
@@ -20,7 +23,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory} >
         <Routes>
           <Route path={AppRoute.Main} element={<Layout />}>
             <Route
@@ -44,8 +47,12 @@ function App(): JSX.Element {
             path="*"
             element={<Error />}
           />
+          <Route
+            path={AppRoute.Error_404}
+            element={<NotFound />}
+          />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

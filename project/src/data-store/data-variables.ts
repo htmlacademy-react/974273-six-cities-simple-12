@@ -3,7 +3,8 @@ export enum AppRoute {
 	Room = '/offer/:id',
 	Login = '/login',
 	PrivateOffice = '/private',
-	NoPlace = '/no-place'
+	NoPlace = '/no-place',
+	Error_404 = '/error/404'
 }
 
 export enum AuthorizationStatus {
@@ -23,4 +24,5 @@ export enum APIRoute {
 	Hotels = '/hotels',
 	Login = '/login',
 	Logout = '/logout',
+	Comments = '/comments/',
 }
