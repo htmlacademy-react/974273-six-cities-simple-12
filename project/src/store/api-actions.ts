@@ -36,11 +36,14 @@ export const fetchHotelAction = createAsyncThunk<void, string, { dispatch: AppDi
   'data/fetchHotel',
   // NOTE: Запрос на сервер, одновременно на несколько ресурсов
   async (_arg, { dispatch, extra: api }) => {
+
     const resultData = await Promise.all([
       api.get<Offer>(`/hotels/${_arg}`),
       api.get<Comments>(`/comments/${_arg}`),
       api.get<Offers>(`/hotels/${_arg}/nearby`)
     ]);
+    dispatch(setHotelsDataLoadingStatus(false));
+
     dispatch(loadOffer(resultData[0].data));
     dispatch(loadComments(resultData[1].data));
     dispatch(loadOffersNearby(resultData[2].data));

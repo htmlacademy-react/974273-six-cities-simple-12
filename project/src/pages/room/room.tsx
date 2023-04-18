@@ -11,14 +11,14 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchHotelAction } from '../../store/api-actions';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
-import { redirectToRoute } from '../../store/actions';
+import { redirectToRoute, setHotelsDataLoadingStatus } from '../../store/actions';
 
 function Room(): JSX.Element {
 
   const { id } = useParams() as { id: string };
 
   const dispatch = useAppDispatch();
+  dispatch(setHotelsDataLoadingStatus(true));
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const hotels = useAppSelector((state) => state.offersCity);
@@ -36,8 +36,12 @@ function Room(): JSX.Element {
   const roomsNearby = useAppSelector((state) => state.offersNearby);
 
   if (!room) {
-    return <LoadingScreen />;
+    // return <LoadingScreen />;
+    return <div>NotFoundPage</div>;
   }
+
+  dispatch(setHotelsDataLoadingStatus(false));
+
 
   const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = room;
   const { avatarUrl, name, isPro } = host;
