@@ -2,12 +2,27 @@ import { Helmet } from 'react-helmet-async';
 import MainEmpty from '../../components/main-empty/main-empty';
 import MainMenu from '../../components/main-menu/main-menu';
 import MainFull from '../../components/main-full/main-full';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import cn from 'classnames';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
+import { fetchHotelsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 function Main(): JSX.Element {
 
+
+  const isHotelsDataLoading = useAppSelector((state) => state.isHotelsDataLoading);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchHotelsAction());
+  }, [dispatch]);
+
   const roomsCitiRend = useAppSelector((state) => state.offersCity);
+
+  if (isHotelsDataLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <main className={cn(

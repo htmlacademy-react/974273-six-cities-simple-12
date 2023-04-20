@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization, loadOffer, loadOffersNearby, loadComments, setStatusSendingComment } from './actions';
+import { chooseCity, chooseOption, isOpenSort, changeColorMarker, loadOffers, setHotelsDataLoadingStatus, requireAuthorization, setError, responseAuthorization, loadOffer, loadOffersNearby, loadComments, setStatusSendingComment, setHotelDataLoadingStatus, checkAuthActionLoadingStatus } from './actions';
 import { AuthorizationStatus, RentSort } from '../data-store/data-variables';
 import { MARKER_OUT } from '../data-store/data-const';
 import { sortByMax, sortByMin } from '../utils/utils';
@@ -19,6 +19,8 @@ type InitialState = {
   offers: Offers;
   offer: Offer | null;
   isHotelsDataLoading: boolean;
+  isHotelDataLoading: boolean;
+  isCheckAuthActionLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   error: string | null;
   userAuthorization: ResponseAuthorization;
@@ -36,6 +38,8 @@ const initialState: InitialState = {
   offers: [],
   offer: null,
   isHotelsDataLoading: false,
+  isHotelDataLoading: false,
+  isCheckAuthActionLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   userAuthorization: {
@@ -99,6 +103,12 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setHotelsDataLoadingStatus, (state, action) => {
       state.isHotelsDataLoading = action.payload;
+    })
+    .addCase(setHotelDataLoadingStatus, (state, action) => {
+      state.isHotelDataLoading = action.payload;
+    })
+    .addCase(checkAuthActionLoadingStatus, (state, action) => {
+      state.isCheckAuthActionLoading = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

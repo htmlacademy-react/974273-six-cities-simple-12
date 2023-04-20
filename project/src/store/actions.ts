@@ -20,6 +20,8 @@ export const loadComments = createAction<Comments>('data/loadComments');
 
 export const setHotelsDataLoadingStatus = createAction<boolean>('data/setHotelsDataLoadingStatus');
 
+export const setHotelDataLoadingStatus = createAction<boolean>('data/setHotelDataLoadingStatus');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const responseAuthorization = createAction<ResponseAuthorization>('user/responseAuthorization');
@@ -29,3 +31,5 @@ export const setError = createAction<string | null>('game/setError');
 export const redirectToRoute = createAction<AppRoute>('route/redirectToRoute');
 
 export const setStatusSendingComment = createAction<boolean>('comment/setStatusSendingComment');
+
+export const checkAuthActionLoadingStatus = createAction<boolean>('user/checkAuthActionLoadingStatus');

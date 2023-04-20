@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import { Comments, Offer, Offers } from '../types/type-store';
 import { APIRoute, AuthorizationStatus } from '../data-store/data-variables';
 import { TIMEOUT_SHOW_ERROR } from '../data-store/data-const';
-import { loadOffers, requireAuthorization, setError, setHotelsDataLoadingStatus, responseAuthorization, loadOffer, loadOffersNearby, loadComments, setStatusSendingComment } from './actions';
+import { loadOffers, requireAuthorization, setError, setHotelsDataLoadingStatus, responseAuthorization, loadOffer, loadOffersNearby, loadComments, setStatusSendingComment, setHotelDataLoadingStatus } from './actions';
 import { AuthData } from '../types/auth-data';
 import { RatingData } from '../types/rating-data';
 import { UserData } from '../types/user-data';
@@ -36,17 +36,16 @@ export const fetchHotelAction = createAsyncThunk<void, string, { dispatch: AppDi
   'data/fetchHotel',
   // NOTE: Запрос на сервер, одновременно на несколько ресурсов
   async (_arg, { dispatch, extra: api }) => {
-
+    dispatch(setHotelDataLoadingStatus(true));
     const resultData = await Promise.all([
       api.get<Offer>(`/hotels/${_arg}`),
       api.get<Comments>(`/comments/${_arg}`),
       api.get<Offers>(`/hotels/${_arg}/nearby`)
     ]);
-    dispatch(setHotelsDataLoadingStatus(false));
-
     dispatch(loadOffer(resultData[0].data));
     dispatch(loadComments(resultData[1].data));
     dispatch(loadOffersNearby(resultData[2].data));
+    dispatch(setHotelDataLoadingStatus(false));
   }
 );
 
@@ -55,8 +54,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, { dispatch: App
   // NOTE: Проверка авторизации при запросе, уже авторизованного
   async (_arg, { dispatch, extra: api }) => {
     try {
-      await api.get(APIRoute.Login);
+      const { data } = await api.get<UserData>(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(responseAuthorization(data));
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }

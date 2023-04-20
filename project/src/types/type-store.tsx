@@ -57,7 +57,7 @@ export type CardProps = {
 }
 
 export type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus?: AuthorizationStatus;
   children: JSX.Element;
 }
 
@@ -111,6 +111,7 @@ export type CityCoordsProp = {
 export type MapProps = {
   city?: CityCoordsProp;
   points: CardProps[];
+  room?: CardProps;
   isMapBig: boolean;
 }
 

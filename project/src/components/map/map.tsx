@@ -8,13 +8,22 @@ import useMap from '../../hooks/useMap';
 import cn from 'classnames';
 import Marker from './marker.svg';
 
-function Map({ points, isMapBig }: MapProps): JSX.Element {
+function Map({ points, room, isMapBig }: MapProps) {
+  // console.log(room);
 
-  const markerColor = useAppSelector((state) => state.markerColor);
+  let markerColor = useAppSelector((state) => state.markerColor);
+  // const roomOffer = useAppSelector((state) => state.offer);
   const cityCenter = points[0].city;
+  // const roomId = room;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityCenter);
+
+  if (room) {
+    points = [...points, room];
+
+    markerColor = room.id;
+  }
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -43,7 +52,7 @@ function Map({ points, isMapBig }: MapProps): JSX.Element {
         }).addTo(map);
       });
     }
-  }, [map, points, isMapBig, currentCustomIcon, defaultCustomIcon, cityCenter]);
+  }, [map, points, isMapBig, currentCustomIcon, defaultCustomIcon, cityCenter, markerColor, mapRef]);
 
   return (
     <section

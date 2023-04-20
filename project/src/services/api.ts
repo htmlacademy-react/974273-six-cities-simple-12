@@ -45,6 +45,8 @@ export const createAPI = (): AxiosInstance => {
             break;
           case 404: store.dispatch(redirectToRoute(AppRoute.Error_404));
             break;
+          case 401: processErrorHandle('');
+            break;
           default: processErrorHandle(error.response.data.error);
         }
       }
