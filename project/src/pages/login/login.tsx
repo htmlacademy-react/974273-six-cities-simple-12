@@ -1,13 +1,16 @@
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { FormEvent, SetStateAction, useEffect, useRef, useState } from 'react';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
+import { getRandomArbitrary } from '../../utils/utils';
+import { CITIES } from '../../data-store/data-const';
+import { chooseCity } from '../../store/actions';
 
 function Login() {
 
-  const cityName = useAppSelector((state) => state.city);
+  // const cityName = useAppSelector((state) => state.city);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
@@ -16,6 +19,7 @@ function Login() {
   const [passError, setPassError] = useState('');
   const [formValid, setFormValid] = useState(true);
 
+  // NOTE: Валидация формы
   const passwordHandler = (event: { target: { value: SetStateAction<string> } }) => {
 
     setPass(event.target.value);
@@ -35,6 +39,19 @@ function Login() {
     } else {
       setPassError('');
     }
+  };
+
+  // type getRandomCityType = (cities: string[]) => string;
+
+  const getRandomCity = (cities: string[]) => {
+    const randomCaunt = getRandomArbitrary(0, cities.length);
+    return cities[randomCaunt];
+  };
+
+  const cityName = getRandomCity(CITIES);
+
+  const updateCity = () => {
+    dispatch(chooseCity({ cityName }));
   };
 
   const onSubmit = (authData: AuthData) => {
@@ -106,7 +123,7 @@ function Login() {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link to={'/'} className="locations__item-link">
+            <Link to={'/'} className="locations__item-link" onClick={updateCity}>
               <span>{cityName}</span>
             </Link>
           </div>
