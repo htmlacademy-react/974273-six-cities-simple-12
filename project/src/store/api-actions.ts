@@ -77,9 +77,9 @@ export const loginAction = createAsyncThunk<void, AuthData, { dispatch: AppDispa
 export const commentsAction = createAsyncThunk<void, RatingData, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>(
   'data/comments',
   async ({ id, comment, rating }, { dispatch, extra: api }) => {
-    dispatch(setStatusSendingComment(false));
-    const { data } = await api.post<UserCommentData>(`${APIRoute.Comments}${id}`, { comment, rating });
     dispatch(setStatusSendingComment(true));
+    const { data } = await api.post<UserCommentData>(`${APIRoute.Comments}${id}`, { comment, rating });
+    dispatch(setStatusSendingComment(false));
     dispatch(loadComments(data));
   }
 );

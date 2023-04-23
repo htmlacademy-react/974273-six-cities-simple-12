@@ -1,9 +1,10 @@
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useMemo, useRef, useState } from 'react';
 import StarRating from '../star/star-rating';
 import { RatingData } from '../../types/rating-data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Params, useParams } from 'react-router-dom';
 import { commentsAction } from '../../store/api-actions';
+import { RATINGS } from '../../data-store/data-const';
 
 function FormWithComment(): JSX.Element {
 
@@ -17,24 +18,12 @@ function FormWithComment(): JSX.Element {
     review: '',
   });
 
-  const [isDisabled, setDisabled] = useState(true);
+  const isDisabledMemo = useMemo(() => {
+    const isDisabled = dataForm.rating === 0 || dataForm.review === '' || dataForm.review.length < 50 || isDisabledSending;
+    return isDisabled;
+  }, [dataForm]);
 
-  // NOTE: Очистка формы, а именно рейтинга
-  useEffect(() => {
-    if (isDisabledSending) {
-      formRef.current?.reset();
-    }
-  }, [isDisabledSending]);
-
-  useEffect(() => {
-    if ((dataForm.review.length > 50) && Number(dataForm.rating) > 0 && isDisabledSending) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [dataForm.rating, dataForm.review, isDisabledSending]);
-
-  function fieldChangeHeandle(event: React.FormEvent<HTMLTextAreaElement> | React.FormEvent<HTMLInputElement>): void {
+  const fieldChangeHeandle = (event: React.FormEvent<HTMLTextAreaElement> | React.FormEvent<HTMLInputElement>): void => {
 
     const { value, name } = event.target as HTMLInputElement;
 
@@ -42,27 +31,28 @@ function FormWithComment(): JSX.Element {
       ...dataForm,
       [name]: value,
     });
-  }
+  };
 
   // NOTE: Отравка данных и одновременно обнуление формы
   const onSubmit = (ratingData: RatingData) => {
     dispatch(commentsAction(ratingData));
+
     setDataForm({
       rating: 0,
       review: '',
     });
+
+    formRef.current?.reset();
   };
 
   const handleSubmitSend = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (dataForm.review.length > 50 && dataForm.rating !== 0) {
-      onSubmit({
-        id: String(id),
-        comment: dataForm.review,
-        rating: dataForm.rating,
-      });
-    }
+    onSubmit({
+      id: String(id),
+      comment: dataForm.review,
+      rating: dataForm.rating,
+    });
   };
 
   return (
@@ -75,14 +65,14 @@ function FormWithComment(): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {Array.from(Array(5), (v, i) => (<StarRating key={i} choosingStar={fieldChangeHeandle} numberId={5 - i} />))}
+        {RATINGS.map((rating, i) => (<StarRating key={rating} choosingStar={fieldChangeHeandle} ratingName={rating} numberId={5 - i} isDisabledSending={isDisabledSending} />))}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" onChange={fieldChangeHeandle} value={dataForm.review} placeholder="Tell how was your stay, what you like and what can be improved" minLength={50} maxLength={300}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" onChange={fieldChangeHeandle} value={dataForm.review} placeholder="Tell how was your stay, what you like and what can be improved" minLength={50} maxLength={300} disabled={isDisabledSending}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabled}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabledMemo}>Submit</button>
       </div>
     </form>
   );

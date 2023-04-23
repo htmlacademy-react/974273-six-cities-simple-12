@@ -50,7 +50,7 @@ const initialState: InitialState = {
     name: '',
     token: '',
   },
-  isSendingComment: true,
+  isSendingComment: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {

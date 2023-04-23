@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
-// import { redirectToRoute } from '../../store/actions';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { redirectToRoute } from '../../store/actions';
 
@@ -24,7 +23,6 @@ function Room(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   useEffect(() => {
-    // dispatch(checkAuthAction());
     dispatch(fetchHotelsAction());
 
     dispatch(fetchHotelAction(String(id)));

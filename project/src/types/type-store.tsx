@@ -76,6 +76,8 @@ export type ListRoomProps = {
 export type StarProps = {
   choosingStar: (e: React.FormEvent<HTMLInputElement>) => void;
   numberId: number;
+  isDisabledSending: boolean;
+  ratingName: string;
 }
 
 export type Review = {
