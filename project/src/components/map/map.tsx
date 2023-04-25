@@ -10,12 +10,9 @@ import Marker from './marker.svg';
 import { getMarkerColor } from '../../store/main-process/selectors';
 
 function Map({ points, room, isMapBig }: MapProps) {
-  // console.log(room);
 
   let markerColor = useAppSelector(getMarkerColor);
-  // const roomOffer = useAppSelector((state) => state.offer);
   const cityCenter = points[0].city;
-  // const roomId = room;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityCenter);

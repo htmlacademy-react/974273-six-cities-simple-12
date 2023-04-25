@@ -47,8 +47,6 @@ function FormWithComment(): JSX.Element {
     if (ratingElement) {
       (ratingElement as HTMLInputElement).checked = false;
     }
-
-    // formRef.current?.reset();
   };
 
   const handleSubmitSend = (event: FormEvent<HTMLFormElement>) => {

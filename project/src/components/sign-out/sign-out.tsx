@@ -5,9 +5,7 @@ import { getUserAuthorization } from '../../store/user-process/selectors';
 
 function SignOut(): JSX.Element {
 
-  // const userEmail = useAppSelector(getUserAuthorization);
   const { email, avatarUrl } = useAppSelector(getUserAuthorization);
-  // const userIcon = useAppSelector((state) => state.userAuthorization.avatarUrl);
   const dispatch = useAppDispatch();
 
   const signOutChange = () => {
