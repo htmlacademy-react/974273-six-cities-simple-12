@@ -7,18 +7,19 @@ import cn from 'classnames';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { fetchHotelsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
+import { getIsHotelsDataLoading, getOffersCity } from '../../store/data-process/selectors';
 
 function Main(): JSX.Element {
 
 
-  const isHotelsDataLoading = useAppSelector((state) => state.isHotelsDataLoading);
+  const isHotelsDataLoading = useAppSelector(getIsHotelsDataLoading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchHotelsAction());
   }, [dispatch]);
 
-  const roomsCitiRend = useAppSelector((state) => state.offersCity);
+  const roomsCitiRend = useAppSelector(getOffersCity);
 
   if (isHotelsDataLoading) {
     return <LoadingScreen />;

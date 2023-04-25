@@ -5,11 +5,12 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Params, useParams } from 'react-router-dom';
 import { commentsAction } from '../../store/api-actions';
 import { RATINGS } from '../../data-store/data-const';
+import { getIsSendingComment } from '../../store/data-process/selectors';
 
 function FormWithComment(): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const isDisabledSending = useAppSelector((state) => state.isSendingComment);
+  const isDisabledSending = useAppSelector(getIsSendingComment);
   const formRef = useRef<HTMLFormElement>(null);
   const { id } = useParams<Params>();
 
@@ -33,7 +34,7 @@ function FormWithComment(): JSX.Element {
     });
   };
 
-  // NOTE: Отравка данных и одновременно обнуление формы
+  // NOTE: Отравка данных и обнуление формы
   const onSubmit = (ratingData: RatingData) => {
     dispatch(commentsAction(ratingData));
 
@@ -42,7 +43,12 @@ function FormWithComment(): JSX.Element {
       review: '',
     });
 
-    formRef.current?.reset();
+    const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
+    if (ratingElement) {
+      (ratingElement as HTMLInputElement).checked = false;
+    }
+
+    // formRef.current?.reset();
   };
 
   const handleSubmitSend = (event: FormEvent<HTMLFormElement>) => {

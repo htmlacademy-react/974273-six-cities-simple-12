@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
 import { CityItemProps } from '../../types/type-store';
+import { getCity } from '../../store/data-process/selectors';
 
 function CityItem({ city, clickCity }: CityItemProps) {
 
-  const cityChoose = useAppSelector((state) => state.city);
+  const cityChoose = useAppSelector(getCity);
 
   return (
     <li

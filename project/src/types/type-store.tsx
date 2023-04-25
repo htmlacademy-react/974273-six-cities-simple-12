@@ -6,6 +6,8 @@ export type Offer = CardProps;
 
 export type Comments = Review[];
 
+export type OfferDatas = [Offer, Comments, Offers];
+
 export type ResponseAuthorization = {
   avatarUrl: string;
   email: string;

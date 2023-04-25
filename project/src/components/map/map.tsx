@@ -7,11 +7,12 @@ import leaflet from 'leaflet';
 import useMap from '../../hooks/useMap';
 import cn from 'classnames';
 import Marker from './marker.svg';
+import { getMarkerColor } from '../../store/main-process/selectors';
 
 function Map({ points, room, isMapBig }: MapProps) {
   // console.log(room);
 
-  let markerColor = useAppSelector((state) => state.markerColor);
+  let markerColor = useAppSelector(getMarkerColor);
   // const roomOffer = useAppSelector((state) => state.offer);
   const cityCenter = points[0].city;
   // const roomId = room;

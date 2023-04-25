@@ -6,11 +6,10 @@ import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
 import { getRandomArbitrary } from '../../utils/utils';
 import { CITIES } from '../../data-store/data-const';
-import { chooseCity } from '../../store/actions';
+import { chooseCity } from '../../store/data-process/data-process';
 
 function Login() {
 
-  // const cityName = useAppSelector((state) => state.city);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
@@ -40,8 +39,6 @@ function Login() {
       setPassError('');
     }
   };
-
-  // type getRandomCityType = (cities: string[]) => string;
 
   const getRandomCity = (cities: string[]) => {
     const randomCaunt = getRandomArbitrary(0, cities.length);

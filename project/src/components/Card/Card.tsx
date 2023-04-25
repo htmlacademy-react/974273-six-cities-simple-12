@@ -2,10 +2,8 @@ import { Link } from 'react-router-dom';
 import { CardDataObject } from '../../types/type-store';
 import { RATING_STEP, MARKER_OUT } from '../../data-store/data-const';
 import { useAppDispatch } from '../../hooks';
-import { changeColorMarker } from '../../store/actions';
+import { changeColorMarker } from '../../store/main-process/main-process';
 import Error from '../../pages/error/error';
-// import { store } from '../../store';
-// import { fetchHotelAction } from '../../store/api-actions';
 
 function Card({ dataRoom }: CardDataObject): JSX.Element {
 
@@ -30,17 +28,12 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
     return <Error />;
   }
 
-  // const clickLink = () => {
-  //   store.dispatch(fetchHotelAction(String(id)));
-  // };
-
   return (
     <article className="cities__card place-card" onMouseOver={onMouseOverHandler} onMouseOut={onMouseOutHandler} >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ' '}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link
           to={`/offer/${id}`}
-        // onClick={clickLink}
         >
           <img className="place-card__image" src={images[0]} width="260" height="200" alt="Room" />
         </Link>
@@ -61,7 +54,6 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
         <h2 className="place-card__name">
           <Link
             to={`/offer/${id}`}
-          // onClick={clickLink}
           >
             {title}
           </Link>

@@ -1,5 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
+import { getSortName } from '../../store/data-process/selectors';
 
 type SortingElemProps = {
   nameOption: string;
@@ -8,7 +9,7 @@ type SortingElemProps = {
 
 function SortingElem({ nameOption, clickOption }: SortingElemProps) {
 
-  const chooseOption = useAppSelector((state) => state.sortName);
+  const chooseOption = useAppSelector(getSortName);
 
   return (
     <li

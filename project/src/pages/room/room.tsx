@@ -13,14 +13,16 @@ import { useEffect } from 'react';
 import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { redirectToRoute } from '../../store/actions';
+import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function Room(): JSX.Element {
-  const isHotelDataLoading = useAppSelector((state) => state.isHotelDataLoading);
+  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
 
   const { id } = useParams() as { id: string };
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     dispatch(fetchHotelsAction());
@@ -29,10 +31,10 @@ function Room(): JSX.Element {
   }, [dispatch, id]);
 
 
-  const room = useAppSelector((state) => state.offer);
-  const comments = useAppSelector((state) => state.comments);
-  const roomsNearby = useAppSelector((state) => state.offersNearby);
-  const hotels = useAppSelector((state) => state.offersCity);
+  const room = useAppSelector(getOffer);
+  const comments = useAppSelector(getComments);
+  const roomsNearby = useAppSelector(getOffersNearby);
+  const hotels = useAppSelector(getOffersCity);
 
   if (isHotelDataLoading) {
     return <LoadingScreen />;
