@@ -11,3 +11,7 @@ export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', '
 export const MARKER_OUT = -1;
 
 export const TIMEOUT_SHOW_ERROR = 5000;
+
+export const SORT_NAME = 'Popular';
+
+export const RATINGS = ['prefect', 'good', 'not bad', 'badly', 'terribly'];

@@ -1,10 +1,10 @@
 export enum AppRoute {
 	Main = '/',
-	Room = '/offer/:id',
-	Login = '/login',
-	PrivateOffice = '/private',
-	NoPlace = '/no-place',
-	Error_404 = '/error/404'
+	Room = 'offer/:id',
+	Login = 'login',
+	PrivateOffice = 'private',
+	NoPlace = 'no-place',
+	Error_404 = 'error/404'
 }
 
 export enum AuthorizationStatus {
@@ -25,4 +25,10 @@ export enum APIRoute {
 	Login = '/login',
 	Logout = '/logout',
 	Comments = '/comments/',
+}
+
+export enum NameSpace {
+	Data = 'DATA',
+	Main = 'MAIN',
+	User = 'USER',
 }

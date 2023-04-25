@@ -3,10 +3,11 @@ import SignIn from '../sign-in/sign-in';
 import { useAppSelector } from '../../hooks';
 import SignOut from '../sign-out/sign-out';
 import { AuthorizationStatus } from '../../data-store/data-variables';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function HeaderBody(): JSX.Element {
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <header className="header">

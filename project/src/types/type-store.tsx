@@ -6,6 +6,8 @@ export type Offer = CardProps;
 
 export type Comments = Review[];
 
+export type OfferDatas = [Offer, Comments, Offers];
+
 export type ResponseAuthorization = {
   avatarUrl: string;
   email: string;
@@ -57,7 +59,7 @@ export type CardProps = {
 }
 
 export type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatus;
+  authorizationStatus?: AuthorizationStatus;
   children: JSX.Element;
 }
 
@@ -76,6 +78,8 @@ export type ListRoomProps = {
 export type StarProps = {
   choosingStar: (e: React.FormEvent<HTMLInputElement>) => void;
   numberId: number;
+  isDisabledSending: boolean;
+  ratingName: string;
 }
 
 export type Review = {
@@ -111,6 +115,7 @@ export type CityCoordsProp = {
 export type MapProps = {
   city?: CityCoordsProp;
   points: CardProps[];
+  room?: CardProps;
   isMapBig: boolean;
 }
 

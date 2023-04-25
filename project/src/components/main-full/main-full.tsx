@@ -1,21 +1,23 @@
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { isOpenSort } from '../../store/actions';
+// import { isOpenSort } from '../../store/actions';
 import SortingOptions from '../sorting-options/sorting-options';
+import { getCity, getIsOpenSort, getOffersCity, getSortName } from '../../store/data-process/selectors';
+import { isOpenSort } from '../../store/data-process/data-process';
 
 function MainFull() {
 
-  const opensortOprions = useAppSelector((state) => state.isOpenSort);
+  const opensortOprions = useAppSelector(getIsOpenSort);
   const dispatch = useAppDispatch();
 
   const clickSortBy = () => {
     dispatch(isOpenSort());
   };
 
-  const rentRoomsCity = useAppSelector((state) => state.offersCity);
-  const cityName = useAppSelector((state) => state.city);
-  const sortName = useAppSelector((state) => state.sortName);
+  const rentRoomsCity = useAppSelector(getOffersCity);
+  const cityName = useAppSelector(getCity);
+  const sortName = useAppSelector(getSortName);
 
   return (
     <div className="cities__places-container container">

@@ -10,37 +10,45 @@ import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { fetchHotelAction } from '../../store/api-actions';
+import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { redirectToRoute } from '../../store/actions';
+import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function Room(): JSX.Element {
+  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
 
   const { id } = useParams() as { id: string };
-
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const hotels = useAppSelector((state) => state.offersCity);
-
-  if (!hotels.find((item) => item.id === Number(id))) {
-    dispatch(redirectToRoute(AppRoute.Error_404));
-  }
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
+    dispatch(fetchHotelsAction());
+
     dispatch(fetchHotelAction(String(id)));
-  }, []);
+  }, [dispatch, id]);
 
-  const room = useAppSelector((state) => state.offer);
-  const comments = useAppSelector((state) => state.comments);
-  const roomsNearby = useAppSelector((state) => state.offersNearby);
 
-  if (!room) {
+  const room = useAppSelector(getOffer);
+  const comments = useAppSelector(getComments);
+  const roomsNearby = useAppSelector(getOffersNearby);
+  const hotels = useAppSelector(getOffersCity);
+
+  if (isHotelDataLoading) {
     return <LoadingScreen />;
+  }
+  if (!room) {
+    return <div>NotFoundPage</div>;
   }
 
   const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = room;
   const { avatarUrl, name, isPro } = host;
+
+  if (!hotels.find((item) => item.id === Number(id))) {
+    dispatch(redirectToRoute(AppRoute.Error_404));
+  }
 
   return (
     <main className="page__main page__main--property">
@@ -101,7 +109,7 @@ function Room(): JSX.Element {
             </section>
           </div>
         </div>
-        <Map points={roomsNearby} isMapBig />
+        <Map points={roomsNearby} room={room} isMapBig />
       </section>
       <div className="container">
         <section className="near-places places">

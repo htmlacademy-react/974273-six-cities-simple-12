@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer } from './reducer';
+// import { reducer } from './reducer';
 import { createAPI } from '../services/api';
 import { redirect } from './middlewares/redirect';
+import { rootReducer } from './root-reducer';
 
 const api = createAPI();
 
 // NOTE: Создание хранилища с помощью @reduxjs/toolkit
 // NOTE: middleware
 export const store = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {

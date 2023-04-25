@@ -1,6 +1,7 @@
 import { optionsSorting } from '../../data-store/data-variables';
 import { useAppDispatch } from '../../hooks';
-import { chooseOption, isOpenSort } from '../../store/actions';
+import { chooseOption, isOpenSort } from '../../store/data-process/data-process';
+// import { chooseOption, isOpenSort } from '../../store/actions';
 import SortingElem from '../sorting-elem/sorting-elem';
 
 function SortingOptions(): JSX.Element {
