@@ -3,7 +3,6 @@ import { CITIES } from '../../data-store/data-const';
 
 import { useAppDispatch } from '../../hooks';
 import { chooseCity } from '../../store/data-process/data-process';
-// import { chooseCity } from '../../store/actions';
 
 function ListSities(): JSX.Element {
 

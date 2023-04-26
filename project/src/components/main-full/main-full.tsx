@@ -1,7 +1,6 @@
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-// import { isOpenSort } from '../../store/actions';
 import SortingOptions from '../sorting-options/sorting-options';
 import { getCity, getIsOpenSort, getOffersCity, getSortName } from '../../store/data-process/selectors';
 import { isOpenSort } from '../../store/data-process/data-process';
