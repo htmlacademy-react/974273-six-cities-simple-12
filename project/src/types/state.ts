@@ -1,6 +1,5 @@
-// NOTE: Типизация глобального хранилища, типизация Redux
 import { AuthorizationStatus } from '../data-store/data-variables';
-import { store } from '../store';
+import { store } from '../store/store';
 import { Comments, Offer, Offers, ResponseAuthorization } from './type-store';
 
 export type State = ReturnType<typeof store.getState>;

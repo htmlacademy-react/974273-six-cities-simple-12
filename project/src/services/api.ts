@@ -1,8 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
+
+import { getToken } from './token';
 import { processErrorHandle } from './process-error-handle';
-import { store } from '../store';
+import { store } from '../store/store';
 import { redirectToRoute } from '../store/actions';
 import { AppRoute } from '../data-store/data-variables';
 

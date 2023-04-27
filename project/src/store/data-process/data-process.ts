@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { NameSpace, RentSort } from '../../data-store/data-variables';
 import { commentsAction, fetchHotelAction, fetchHotelsAction } from '../api-actions';
 import { DataProcess } from '../../types/state';

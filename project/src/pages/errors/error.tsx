@@ -1,6 +1,7 @@
+import './error.css';
+
 import { gsap } from 'gsap';
 import { Helmet } from 'react-helmet-async';
-import './error.css';
 
 function Error(): JSX.Element {
 

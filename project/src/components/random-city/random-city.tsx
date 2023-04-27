@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
+
 import { CITIES } from '../../data-store/data-const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hook';
 import { chooseCity } from '../../store/data-process/data-process';
 import { getRandomArbitrary } from '../../utils/utils';
-import { memo } from 'react';
 
 function RandomCity(): JSX.Element {
 
@@ -18,13 +19,13 @@ function RandomCity(): JSX.Element {
 
   const cityName = getRandomCity(CITIES);
 
-  const updateCity = () => {
+  const handleLinkUpdateCity = () => {
     dispatch(chooseCity({ cityName }));
   };
 
   return (
     <div className="locations__item">
-      <Link to={'/'} className="locations__item-link" onClick={updateCity}>
+      <Link to={'/'} className="locations__item-link" onClick={handleLinkUpdateCity}>
         <span>{cityName}</span>
       </Link>
     </div>

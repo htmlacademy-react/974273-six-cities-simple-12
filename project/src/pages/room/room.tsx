@@ -1,3 +1,13 @@
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+
+import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
+import { useAppDispatch, useAppSelector } from '../../hooks/hook';
+import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
+import { redirectToRoute } from '../../store/actions';
+import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { roundUp } from '../../utils/utils';
 
 import FormWithComment from '../../components/form-with-comment/form-with-comment';
 import ImageListRoom from '../../components/image-list-room/image-list-room';
@@ -7,35 +17,24 @@ import TechnicListRoom from '../../components/technick-lisl-room/tichnick-list-r
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
-import { redirectToRoute } from '../../store/actions';
-import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { roundUp } from '../../utils/utils';
 
 function Room(): JSX.Element {
-  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
 
   const { id } = useParams() as { id: string };
-  const dispatch = useAppDispatch();
 
+  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const room = useAppSelector(getOffer);
+  const comments = useAppSelector(getComments);
+  const roomsNearby = useAppSelector(getOffersNearby);
+  const hotels = useAppSelector(getOffersCity);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchHotelsAction());
 
     dispatch(fetchHotelAction(String(id)));
   }, [dispatch, id]);
-
-
-  const room = useAppSelector(getOffer);
-  const comments = useAppSelector(getComments);
-  const roomsNearby = useAppSelector(getOffersNearby);
-  const hotels = useAppSelector(getOffersCity);
 
   if (isHotelDataLoading) {
     return <LoadingScreen />;

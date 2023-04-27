@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { NameSpace } from '../../data-store/data-variables';
 import { MARKER_OUT } from '../../data-store/data-const';
 import { MainProcess } from '../../types/state';

@@ -1,5 +1,5 @@
 import { TIMEOUT_SHOW_ERROR } from '../data-store/data-const';
-import { store } from '../store';
+import { store } from '../store/store';
 import { clearErrorAction, setError } from '../store/data-process/data-process';
 
 export const processErrorHandle = (message: string): void => {

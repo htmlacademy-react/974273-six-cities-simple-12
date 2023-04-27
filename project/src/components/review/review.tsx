@@ -5,6 +5,7 @@ function Rewiew({ review }: ReviewProps): JSX.Element {
 
   const { comment, date, rating, user } = review;
   const { avatarUrl, name } = user;
+
   const dateComment = new Date(date);
   const dataCommentMachine = dateComment.toISOString().split('T')[0];
   const dataCommentPublic = dateComment.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });

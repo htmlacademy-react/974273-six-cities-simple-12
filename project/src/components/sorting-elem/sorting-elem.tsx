@@ -1,13 +1,10 @@
-import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
+
+import { useAppSelector } from '../../hooks/hook';
 import { getSortName } from '../../store/data-process/selectors';
+import { SortingElemProps } from '../../types/type-store';
 
-type SortingElemProps = {
-  nameOption: string;
-  clickOption(elem: string): void;
-};
-
-function SortingElem({ nameOption, clickOption }: SortingElemProps) {
+function SortingElem({ nameOption, clickOption }: SortingElemProps): JSX.Element {
 
   const chooseOption = useAppSelector(getSortName);
 

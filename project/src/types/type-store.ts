@@ -76,7 +76,7 @@ export type ListRoomProps = {
 }
 
 export type StarProps = {
-  choosingStar: (e: React.FormEvent<HTMLInputElement>) => void;
+  heandleInputStar: (e: React.FormEvent<HTMLInputElement>) => void;
   numberId: number;
   isDisabledSending: boolean;
   ratingName: string;
@@ -128,3 +128,8 @@ export interface IShippingFields {
   rating: number;
   comment: string;
 }
+
+export type SortingElemProps = {
+  nameOption: string;
+  clickOption(elem: string): void;
+};

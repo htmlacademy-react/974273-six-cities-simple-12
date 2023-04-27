@@ -1,9 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import { useAppDispatch } from '../../hooks';
+import { Link } from 'react-router-dom';
 import { FormEvent, SetStateAction, useEffect, useRef, useState } from 'react';
+
+import { useAppDispatch } from '../../hooks/hook';
 import { AuthData } from '../../types/auth-data';
 import { loginAction } from '../../store/api-actions';
-import { Link } from 'react-router-dom';
+
 import RandomCity from '../../components/random-city/random-city';
 
 function Login(): JSX.Element {

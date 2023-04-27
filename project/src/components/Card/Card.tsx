@@ -1,24 +1,25 @@
 import { Link } from 'react-router-dom';
+
 import { CardDataObject } from '../../types/type-store';
 import { MARKER_OUT } from '../../data-store/data-const';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hook';
 import { changeColorMarker } from '../../store/main-process/main-process';
 import { roundUp } from '../../utils/utils';
-import Error from '../../pages/error/error';
+
+import Error from '../../pages/errors/error';
 
 function Card({ dataRoom }: CardDataObject): JSX.Element {
 
   const { id, images, price, rating, title, type, isPremium } = dataRoom;
   const ratingProcent = roundUp(rating);
-
   const dispatch = useAppDispatch();
 
-  const onMouseOverHandler = () => {
+  const handleMouseOver = () => {
     const markerId = id;
     dispatch(changeColorMarker({ markerId }));
   };
 
-  const onMouseOutHandler = () => {
+  const handleMouseOut = () => {
     const markerId = MARKER_OUT;
     dispatch(changeColorMarker({ markerId }));
   };
@@ -28,7 +29,7 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
   }
 
   return (
-    <article className="cities__card place-card" onMouseOver={onMouseOverHandler} onMouseOut={onMouseOutHandler} >
+    <article className="cities__card place-card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ' '}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link
