@@ -21,14 +21,14 @@ function Rewiew({ review }: ReviewProps): JSX.Element {
           {name}
         </span>
       </div>
-      <div className="reviews__info">
+      <div className="reviews__info" >
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
             <span style={{ width: `${ratingProcent}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <p className="reviews__text">
+        <p className="reviews__text" style={{ overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '550px' }} >
           {comment}
         </p>
         <time className="reviews__time" dateTime={dataCommentMachine}>{dataCommentPublic}</time>
