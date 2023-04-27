@@ -72,11 +72,21 @@ function Login(): JSX.Element {
   };
 
   useEffect(() => {
-    if (passError || emailError) {
-      setFormValid(true);
-    } else {
-      setFormValid(false);
+
+    let isMounted = true;
+
+    if (isMounted) {
+      if (passError || emailError) {
+        setFormValid(true);
+      } else {
+        setFormValid(false);
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
+
   }, [passError, emailError]);
 
   return (

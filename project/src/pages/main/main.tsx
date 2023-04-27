@@ -18,7 +18,16 @@ function Main(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchHotelsAction());
+
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchHotelsAction());
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 
 

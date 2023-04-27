@@ -39,19 +39,28 @@ function FormWithComment(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!clearingForm) {
-      setDataForm({
-        rating: 0,
-        review: '',
-      });
 
-      const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
-      if (ratingElement) {
-        (ratingElement as HTMLInputElement).checked = false;
+    let isMounted = true;
+
+    if (isMounted) {
+      if (!clearingForm) {
+        setDataForm({
+          rating: 0,
+          review: '',
+        });
+
+        const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
+        if (ratingElement) {
+          (ratingElement as HTMLInputElement).checked = false;
+        }
+
+        dispatch(clearingFormAction());
       }
-
-      dispatch(clearingFormAction());
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [clearingForm, dataForm.rating, dispatch]);
 
   const onSubmit = (ratingData: RatingData) => {

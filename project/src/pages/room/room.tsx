@@ -31,9 +31,17 @@ function Room(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchHotelsAction());
 
-    dispatch(fetchHotelAction(String(id)));
+    let isMounted = true;
+
+    if (isMounted) {
+      dispatch(fetchHotelsAction());
+      dispatch(fetchHotelAction(String(id)));
+    }
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, id]);
 
   if (isHotelDataLoading) {
