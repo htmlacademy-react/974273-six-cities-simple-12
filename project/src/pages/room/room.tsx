@@ -6,15 +6,16 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import TechnicListRoom from '../../components/technick-lisl-room/tichnick-list-room';
 import CardList from '../../components/card-list/card-list';
 import Map from '../../components/map/map';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
 import { redirectToRoute } from '../../store/actions';
 import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { roundUp } from '../../utils/utils';
 
 function Room(): JSX.Element {
   const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
@@ -43,8 +44,9 @@ function Room(): JSX.Element {
     return <div>NotFoundPage</div>;
   }
 
-  const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price } = room;
+  const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price, type } = room;
   const { avatarUrl, name, isPro } = host;
+  const ratingProcent = roundUp(rating);
 
   if (!hotels.find((item) => item.id === Number(id))) {
     dispatch(redirectToRoute(AppRoute.Error_404));
@@ -64,14 +66,14 @@ function Room(): JSX.Element {
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={{ width: '80%' }}></span>
+                <span style={{ width: `${ratingProcent}%` }}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
               <span className="property__rating-value rating__value">{rating}</span>
             </div>
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
-                Apartment
+                {type}
               </li>
               <li className="property__feature property__feature--bedrooms">
                 {bedrooms}

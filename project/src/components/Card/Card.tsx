@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import { CardDataObject } from '../../types/type-store';
-import { RATING_STEP, MARKER_OUT } from '../../data-store/data-const';
+import { MARKER_OUT } from '../../data-store/data-const';
 import { useAppDispatch } from '../../hooks';
 import { changeColorMarker } from '../../store/main-process/main-process';
 import Error from '../../pages/error/error';
+import { roundUp } from '../../utils/utils';
 
 function Card({ dataRoom }: CardDataObject): JSX.Element {
 
   const { id, images, price, rating, title, type, isPremium } = dataRoom;
-  const ratingProcent = rating * RATING_STEP;
+  const ratingProcent = roundUp(rating);
 
   const dispatch = useAppDispatch();
 

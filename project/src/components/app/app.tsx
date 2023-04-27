@@ -25,13 +25,13 @@ function App(): JSX.Element {
               path={AppRoute.Room}
               element={<Room />}
             />
-            <Route
-              path={AppRoute.Login}
-              element={
-                <PrivateRoute />
-              }
-            />
           </Route>
+          <Route
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute />
+            }
+          />
           <Route
             path="*"
             element={<Error />}

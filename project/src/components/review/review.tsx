@@ -1,13 +1,15 @@
-import { RATING_STEP } from '../../data-store/data-const';
 import { ReviewProps } from '../../types/type-store';
+import { roundUp } from '../../utils/utils';
 
 function Rewiew({ review }: ReviewProps): JSX.Element {
 
   const { comment, date, rating, user } = review;
   const { avatarUrl, name } = user;
-  const dateArrays = date.split(' ');
+  const dateComment = new Date(date);
+  const dataCommentMachine = dateComment.toISOString().split('T')[0];
+  const dataCommentPublic = dateComment.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
 
-  const ratingProcent = rating * RATING_STEP;
+  const ratingProcent = roundUp(rating);
 
   return (
     <li className="reviews__item">
@@ -29,7 +31,7 @@ function Rewiew({ review }: ReviewProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{`${dateArrays[1]} ${dateArrays[3]}`}</time>
+        <time className="reviews__time" dateTime={dataCommentMachine}>{dataCommentPublic}</time>
       </div>
     </li>
   );
