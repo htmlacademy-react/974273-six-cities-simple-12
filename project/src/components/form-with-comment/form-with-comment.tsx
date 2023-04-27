@@ -22,7 +22,7 @@ function FormWithComment(): JSX.Element {
   const isDisabledMemo = useMemo(() => {
     const isDisabled = dataForm.rating === 0 || dataForm.review === '' || dataForm.review.length < 50 || isDisabledSending;
     return isDisabled;
-  }, [dataForm]);
+  }, [dataForm.rating, dataForm.review, isDisabledSending]);
 
   const fieldChangeHeandle = (event: React.FormEvent<HTMLTextAreaElement> | React.FormEvent<HTMLInputElement>): void => {
 

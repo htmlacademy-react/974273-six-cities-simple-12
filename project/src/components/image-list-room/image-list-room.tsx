@@ -10,7 +10,7 @@ function ImageListRoom({ listRoom }: ListRoomProps): JSX.Element {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        {listRoom?.length > 6 ? listRoom?.slice(0, 6).map((imag) => <div key={imag} className="property__image-wrapper"><img className="property__image" src={imag} alt="Photo studio" /></div>) : listRoom?.map((imag) => <div key={imag} className="property__image-wrapper"><img className="property__image" src={imag} alt="Photo studio" /></div>)}
+        {listRoom?.length > 6 ? listRoom?.slice(0, 6).map((imag) => <div key={imag} className="property__image-wrapper"><img className="property__image" src={imag} alt='studio' /></div>) : listRoom?.map((imag) => <div key={imag} className="property__image-wrapper"><img className="property__image" src={imag} alt='studio' /></div>)}
       </div>
     </div>
   );
