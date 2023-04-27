@@ -3,8 +3,8 @@ import { CardDataObject } from '../../types/type-store';
 import { MARKER_OUT } from '../../data-store/data-const';
 import { useAppDispatch } from '../../hooks';
 import { changeColorMarker } from '../../store/main-process/main-process';
-import Error from '../../pages/error/error';
 import { roundUp } from '../../utils/utils';
+import Error from '../../pages/error/error';
 
 function Card({ dataRoom }: CardDataObject): JSX.Element {
 
@@ -14,9 +14,7 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
   const dispatch = useAppDispatch();
 
   const onMouseOverHandler = () => {
-
     const markerId = id;
-
     dispatch(changeColorMarker({ markerId }));
   };
 

@@ -14,3 +14,4 @@ export const getOffer = (state: State): Offer | null => state[NameSpace.Data].of
 export const getComments = (state: State): Comments => state[NameSpace.Data].comments;
 export const getOffersNearby = (state: State): Offers => state[NameSpace.Data].offersNearby;
 export const getIsSendingComment = (state: State): boolean => state[NameSpace.Data].isSendingComment;
+export const getClearing = (state: State): boolean => state[NameSpace.Data].clearingForm;

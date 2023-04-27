@@ -21,6 +21,7 @@ const initialState: DataProcess = {
   comments: [],
   offersNearby: [],
   isSendingComment: false,
+  clearingForm: true,
 };
 
 export const dataProcess = createSlice({
@@ -62,6 +63,9 @@ export const dataProcess = createSlice({
     clearErrorAction: (state) => {
       state.error = null;
     },
+    clearingFormAction: (state) => {
+      state.clearingForm = true;
+    },
   },
   extraReducers(builder) {
     builder
@@ -98,6 +102,7 @@ export const dataProcess = createSlice({
       .addCase(commentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
         state.isSendingComment = false;
+        state.clearingForm = false;
       })
       .addCase(commentsAction.rejected, (state) => {
         state.isSendingComment = false;
@@ -105,4 +110,4 @@ export const dataProcess = createSlice({
   },
 });
 
-export const { chooseCity, chooseOption, isOpenSort, setError, clearErrorAction } = dataProcess.actions;
+export const { chooseCity, chooseOption, isOpenSort, setError, clearErrorAction, clearingFormAction } = dataProcess.actions;

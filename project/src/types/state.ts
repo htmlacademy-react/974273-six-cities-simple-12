@@ -25,7 +25,9 @@ export type DataProcess = {
 	comments: Comments;
 	offersNearby: Offers;
 	isSendingComment: boolean;
+	clearingForm: boolean;
 }
+
 export type MainProcess = {
 	markerColor: number;
 }

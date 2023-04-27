@@ -1,16 +1,18 @@
-import { FormEvent, useMemo, useRef, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import StarRating from '../star/star-rating';
 import { RatingData } from '../../types/rating-data';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Params, useParams } from 'react-router-dom';
 import { commentsAction } from '../../store/api-actions';
 import { RATINGS } from '../../data-store/data-const';
-import { getIsSendingComment } from '../../store/data-process/selectors';
+import { getClearing, getIsSendingComment } from '../../store/data-process/selectors';
+import { clearingFormAction } from '../../store/data-process/data-process';
 
 function FormWithComment(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const isDisabledSending = useAppSelector(getIsSendingComment);
+  const clearingForm = useAppSelector(getClearing);
   const formRef = useRef<HTMLFormElement>(null);
   const { id } = useParams<Params>();
 
@@ -34,19 +36,24 @@ function FormWithComment(): JSX.Element {
     });
   };
 
-  // NOTE: Отравка данных и обнуление формы
+  useEffect(() => {
+    if (!clearingForm) {
+      setDataForm({
+        rating: 0,
+        review: '',
+      });
+
+      const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
+      if (ratingElement) {
+        (ratingElement as HTMLInputElement).checked = false;
+      }
+
+      dispatch(clearingFormAction());
+    }
+  }, [clearingForm, dataForm.rating, dispatch]);
+
   const onSubmit = (ratingData: RatingData) => {
     dispatch(commentsAction(ratingData));
-
-    setDataForm({
-      rating: 0,
-      review: '',
-    });
-
-    const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
-    if (ratingElement) {
-      (ratingElement as HTMLInputElement).checked = false;
-    }
   };
 
   const handleSubmitSend = (event: FormEvent<HTMLFormElement>) => {
