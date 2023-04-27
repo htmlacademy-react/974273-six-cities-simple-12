@@ -19,9 +19,9 @@ function FormWithComment(): JSX.Element {
     review: '',
   });
 
-  const isDisabledMemo = useMemo(() => {
-    const isDisabled = dataForm.rating === 0 || dataForm.review === '' || dataForm.review.length < 50 || isDisabledSending;
-    return isDisabled;
+  const breakerButton = useMemo(() => {
+    const breaker = dataForm.rating === 0 || dataForm.review === '' || dataForm.review.length < 50 || isDisabledSending;
+    return breaker;
   }, [dataForm.rating, dataForm.review, isDisabledSending]);
 
   const fieldChangeHeandle = (event: React.FormEvent<HTMLTextAreaElement> | React.FormEvent<HTMLInputElement>): void => {
@@ -76,7 +76,7 @@ function FormWithComment(): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={isDisabledMemo}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={breakerButton}>Submit</button>
       </div>
     </form>
   );
