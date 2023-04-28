@@ -29,7 +29,7 @@ function Rewiew({ review }: ReviewProps): JSX.Element {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <p className="reviews__text" style={{ overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '550px' }} >
+        <p className="reviews__text" style={{ overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '600px' }} >
           {comment}
         </p>
         <time className="reviews__time" dateTime={dataCommentMachine}>{dataCommentPublic}</time>

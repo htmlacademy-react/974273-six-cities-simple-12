@@ -20,12 +20,12 @@ function FormWithComment(): JSX.Element {
   const { id } = useParams<Params>();
 
   const [dataForm, setDataForm] = useState({
-    rating: 0,
+    rating: '',
     review: '',
   });
 
   const breakerButton = useMemo(() => {
-    const breaker = dataForm.rating === 0 || dataForm.review === '' || dataForm.review.length < 50 || isDisabledSending;
+    const breaker = dataForm.rating === '' || dataForm.review === '' || dataForm.review.length < 50 || isDisabledSending;
     return breaker;
   }, [dataForm.rating, dataForm.review, isDisabledSending]);
 
@@ -46,15 +46,9 @@ function FormWithComment(): JSX.Element {
     if (isMounted) {
       if (!clearingForm) {
         setDataForm({
-          rating: 0,
+          rating: '',
           review: '',
         });
-
-        // const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
-
-        // if (ratingElement) {
-        //   (ratingElement as HTMLInputElement).checked = false;
-        // }
 
         if (formRef.current !== null) {
           formRef.current.reset();
@@ -79,7 +73,7 @@ function FormWithComment(): JSX.Element {
     onSubmit({
       id: String(id),
       comment: dataForm.review,
-      rating: dataForm.rating,
+      rating: Number(dataForm.rating),
     });
   };
 
@@ -93,7 +87,7 @@ function FormWithComment(): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {RATINGS.map((rating, i) => (<StarRating key={rating} heandleInputStar={handleFormInput} ratingName={rating} numberId={5 - i} isDisabledSending={isDisabledSending} />))}
+        {RATINGS.map((rating, i) => (<StarRating key={rating} heandleInputStar={handleFormInput} choiseStar={dataForm.rating} ratingName={rating} numberId={5 - i} isDisabledSending={isDisabledSending} />))}
       </div>
       <textarea className="reviews__textarea form__textarea" id="review" name="review" onChange={handleFormInput} value={dataForm.review} placeholder="Tell how was your stay, what you like and what can be improved" minLength={50} maxLength={300} disabled={isDisabledSending}></textarea>
       <div className="reviews__button-wrapper">
