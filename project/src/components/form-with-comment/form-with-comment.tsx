@@ -15,7 +15,8 @@ function FormWithComment(): JSX.Element {
   const dispatch = useAppDispatch();
   const isDisabledSending = useAppSelector(getIsSendingComment);
   const clearingForm = useAppSelector(getClearing);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement | null>(null);
+  // const inputRef = useRef<HTMLInputElement | null>(null);
   const { id } = useParams<Params>();
 
   const [dataForm, setDataForm] = useState({
@@ -49,9 +50,14 @@ function FormWithComment(): JSX.Element {
           review: '',
         });
 
-        const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
-        if (ratingElement) {
-          (ratingElement as HTMLInputElement).checked = false;
+        // const ratingElement = document.getElementById(`${dataForm.rating}-stars`);
+
+        // if (ratingElement) {
+        //   (ratingElement as HTMLInputElement).checked = false;
+        // }
+
+        if (formRef.current !== null) {
+          formRef.current.reset();
         }
 
         dispatch(clearingFormAction());
