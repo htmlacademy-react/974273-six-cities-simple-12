@@ -16,12 +16,11 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
 
   const handleMouseOver = () => {
     const markerId = id;
-    dispatch(changeColorMarker({ markerId }));
+    dispatch(changeColorMarker(markerId));
   };
 
   const handleMouseOut = () => {
-    const markerId = MARKER_OUT;
-    dispatch(changeColorMarker({ markerId }));
+    dispatch(changeColorMarker(MARKER_OUT));
   };
 
   if (!id) {

@@ -12,8 +12,8 @@ export const mainProcess = createSlice({
   name: NameSpace.Main,
   initialState,
   reducers: {
-    changeColorMarker: (state, action: PayloadAction<{ markerId: number }>) => {
-      const { markerId } = action.payload;
+    changeColorMarker: (state, action: PayloadAction<number>) => {
+      const markerId = action.payload;
       state.markerColor = markerId;
     }
   }

@@ -1,3 +1,4 @@
+import './map-property.css';
 import 'leaflet/dist/leaflet.css';
 
 import { useRef, useEffect } from 'react';
@@ -58,9 +59,9 @@ function Map({ points, room, isMapBig }: MapProps) {
   return (
     <section
       className={cn(
+        'map',
         { 'property__map': isMapBig },
         { 'cities__map': !isMapBig },
-        'map'
       )}
       ref={mapRef}
     >

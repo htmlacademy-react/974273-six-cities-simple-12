@@ -114,10 +114,10 @@ export type CityCoordsProp = {
 }
 
 export type MapProps = {
+  isMapBig: boolean;
   city?: CityCoordsProp;
   points: CardProps[];
   room?: CardProps;
-  isMapBig: boolean;
 }
 
 export type CityItemProps = {
