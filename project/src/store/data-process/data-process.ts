@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { NameSpace, RentSort } from '../../data-store/data-variables';
+import { NameSpace, optionsSorting } from '../../data-store/data-variables';
 import { commentsAction, fetchHotelAction, fetchHotelsAction } from '../api-actions';
 import { DataProcess } from '../../types/state';
 import { Offers } from '../../types/type-store';
@@ -30,26 +30,33 @@ export const dataProcess = createSlice({
   initialState,
   reducers: {
     chooseCity: (state, action: PayloadAction<{ cityName: string }>) => {
+
       const { cityName } = action.payload;
+
       state.city = cityName;
       state.offersCity = selectCity(state.offers, state.city);
       state.sortName = SORT_NAME;
       state.isOpenSort = false;
     },
     chooseOption: (state, action: PayloadAction<{ nameOption: string }>) => {
+
       const { nameOption } = action.payload;
+      const sortIndex = optionsSorting.findIndex((optionSorting) => optionSorting.includes(nameOption));
+
       state.sortName = nameOption;
-      if (nameOption === SORT_NAME) {
+
+
+      if (sortIndex === 0) {
         state.offersCity = selectCity(state.offers, state.city);
       } else {
-        switch (nameOption) {
-          case RentSort.PriceMax:
+        switch (sortIndex) {
+          case 1:
             state.offersCity = state.offersCity.sort((a, b) => sortByMax(a.price, b.price));
             break;
-          case RentSort.PriceMin:
+          case 2:
             state.offersCity = state.offersCity.sort((a, b) => sortByMin(a.price, b.price));
             break;
-          case RentSort.RatingMax:
+          case 3:
             state.offersCity = state.offersCity.sort((a, b) => sortByMin(a.rating, b.rating));
             break;
         }
@@ -70,17 +77,14 @@ export const dataProcess = createSlice({
   },
   extraReducers(builder) {
     builder
-      // NOTE: pending - асинхронная загрузка
       .addCase(fetchHotelsAction.pending, (state) => {
         state.isHotelsDataLoading = true;
       })
-      // NOTE: fulfilled - асинхронная загрузка завершена
       .addCase(fetchHotelsAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.offersCity = selectCity(state.offers, state.city);
         state.isHotelsDataLoading = false;
       })
-      //  NOTE: rejected - ошибка при загрузке
       .addCase(fetchHotelsAction.rejected, (state) => {
         state.isHotelsDataLoading = false;
       })

@@ -20,7 +20,6 @@ export const fetchHotelsAction = createAsyncThunk<Offers, undefined, { dispatch:
 
 export const fetchHotelAction = createAsyncThunk<OfferDatas, string, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>(
   'data/fetchHotel',
-  // NOTE: Запрос на сервер, одновременно на несколько ресурсов
   async (arg, { extra: api }) => {
     const offerDatas = await Promise.all([
       api.get<Offer>(`/hotels/${arg}`),
@@ -33,7 +32,6 @@ export const fetchHotelAction = createAsyncThunk<OfferDatas, string, { dispatch:
 
 export const checkAuthAction = createAsyncThunk<ResponseAuthorization, undefined, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>(
   'user/checkAuth',
-  // NOTE: Проверка авторизации при запросе, уже авторизованного
   async (_, { extra: api }) => {
     const { data } = await api.get<UserData>(APIRoute.Login);
     return data;
@@ -42,7 +40,6 @@ export const checkAuthAction = createAsyncThunk<ResponseAuthorization, undefined
 
 export const loginAction = createAsyncThunk<ResponseAuthorization, AuthData, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>(
   'user/login',
-  // NOTE: Авторизация
   async ({ login: email, password }, { extra: api }) => {
     const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(data.token);
