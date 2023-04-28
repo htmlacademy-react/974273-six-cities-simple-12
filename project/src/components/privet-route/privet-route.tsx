@@ -1,20 +1,15 @@
-// import { PrivateRouteProps } from '../../types/type-store';
-import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
-import Login from '../../pages/login/login';
-import { useAppSelector } from '../../hooks';
 import { Navigate } from 'react-router-dom';
-import LoadingScreen from '../loading-screen/loading-screen';
+
+import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
+import { useAppSelector } from '../../hooks/hook';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-// import { Navigate } from 'react-router-dom';
 
-function PrivateRoute() {
+import LoadingScreen from '../loading-screen/loading-screen';
+import Login from '../../pages/login/login';
 
-  // const dispatch = useAppDispatch();
+function PrivateRoute(): JSX.Element {
+
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
-  // useEffect(() => {
-  //   dispatch(checkAuthAction());
-  // }, [dispatch]);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return <LoadingScreen />;

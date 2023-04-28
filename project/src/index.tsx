@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
 import { Provider } from 'react-redux';
-import { store } from './store';
-// import { fetchHotelsAction } from './store/api-actions';
-import ErrorMessage from './components/error-message/error-message';
+
+import { store } from './store/store';
 import { checkAuthAction } from './store/api-actions';
 
-// store.dispatch(fetchHotelsAction());
+import App from './components/app/app';
+import ErrorMessage from './components/error-message/error-message';
+
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(

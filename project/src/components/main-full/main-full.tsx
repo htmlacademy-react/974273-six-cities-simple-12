@@ -1,11 +1,12 @@
-import Map from '../../components/map/map';
-import CardList from '../../components/card-list/card-list';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import SortingOptions from '../sorting-options/sorting-options';
+import { useAppDispatch, useAppSelector } from '../../hooks/hook';
 import { getCity, getIsOpenSort, getOffersCity, getSortName } from '../../store/data-process/selectors';
 import { isOpenSort } from '../../store/data-process/data-process';
 
-function MainFull() {
+import Map from '../../components/map/map';
+import CardList from '../../components/card-list/card-list';
+import SortingOptions from '../sorting-options/sorting-options';
+
+function MainFull(): JSX.Element {
 
   const opensortOprions = useAppSelector(getIsOpenSort);
   const dispatch = useAppDispatch();

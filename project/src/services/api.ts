@@ -1,8 +1,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
+
+import { getToken } from './token';
 import { processErrorHandle } from './process-error-handle';
-import { store } from '../store';
+import { store } from '../store/store';
 import { redirectToRoute } from '../store/actions';
 import { AppRoute } from '../data-store/data-variables';
 
@@ -17,7 +18,6 @@ const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[resp
 const BACKEND_URL = 'https://12.react.pages.academy/six-cities-simple';
 const REQUEST_TIMEOUT = 5000;
 
-// NOTE: Перехватчики асинхронных запросов
 export const createAPI = (): AxiosInstance => {
 
   const api = axios.create({
@@ -25,7 +25,6 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
-  // NOTE: axios. Перехватчик (interceptor), который будет вызывать формирования запроса, но до его отправки серверу. Здесь мы сможем модифицировать конфигурацию axios.
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
       const token = getToken();
@@ -38,7 +37,6 @@ export const createAPI = (): AxiosInstance => {
     },
   );
 
-  // NOTE: axios, error. Перехватчик (interceptor), мы добавляем обработку ответов от сервера. В случае, если мы получаем соответствующую ошибку, мы вызываем функцию `processErrorHandle` и передаем ей сообщение ошибки.Таким образом, мы связали все элементы системы обработки ошибок ответа от сервера.
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<{ error: string }>) => {

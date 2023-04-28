@@ -76,7 +76,8 @@ export type ListRoomProps = {
 }
 
 export type StarProps = {
-  choosingStar: (e: React.FormEvent<HTMLInputElement>) => void;
+  choiseStar: string;
+  heandleInputStar: (e: React.FormEvent<HTMLInputElement>) => void;
   numberId: number;
   isDisabledSending: boolean;
   ratingName: string;
@@ -113,10 +114,10 @@ export type CityCoordsProp = {
 }
 
 export type MapProps = {
+  isMapBig: boolean;
   city?: CityCoordsProp;
   points: CardProps[];
   room?: CardProps;
-  isMapBig: boolean;
 }
 
 export type CityItemProps = {
@@ -128,3 +129,8 @@ export interface IShippingFields {
   rating: number;
   comment: string;
 }
+
+export type SortingElemProps = {
+  nameOption: string;
+  clickOption(elem: string): void;
+};

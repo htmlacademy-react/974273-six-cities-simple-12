@@ -1,8 +1,8 @@
-import CityItem from '../city-item/city-item';
 import { CITIES } from '../../data-store/data-const';
-
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch } from '../../hooks/hook';
 import { chooseCity } from '../../store/data-process/data-process';
+
+import CityItem from '../city-item/city-item';
 
 function ListSities(): JSX.Element {
 

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/hook';
 import { logoutAction } from '../../store/api-actions';
 import { getUserAuthorization } from '../../store/user-process/selectors';
 
@@ -8,7 +9,7 @@ function SignOut(): JSX.Element {
   const { email, avatarUrl } = useAppSelector(getUserAuthorization);
   const dispatch = useAppDispatch();
 
-  const signOutChange = () => {
+  const handleLiChangeSignOut = () => {
     dispatch(logoutAction());
   };
 
@@ -20,7 +21,7 @@ function SignOut(): JSX.Element {
           <span className="header__user-name user__name">{email}</span>
         </div>
       </li>
-      <li className="header__nav-item" onClick={signOutChange}>
+      <li className="header__nav-item" onClick={handleLiChangeSignOut}>
         <Link to={'/'} className="header__nav-link">
           <span className="header__signout">Sign out</span>
         </Link>

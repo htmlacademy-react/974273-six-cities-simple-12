@@ -1,13 +1,17 @@
+import './map-property.css';
 import 'leaflet/dist/leaflet.css';
+
 import { useRef, useEffect } from 'react';
+import leaflet from 'leaflet';
+import cn from 'classnames';
+
 import { URL_MARKER_DEFAULT } from '../../data-store/data-const';
 import { MapProps } from '../../types/type-store';
-import { useAppSelector } from '../../hooks';
-import leaflet from 'leaflet';
-import useMap from '../../hooks/useMap';
-import cn from 'classnames';
-import Marker from './marker.svg';
+import { useAppSelector } from '../../hooks/hook';
 import { getMarkerColor } from '../../store/main-process/selectors';
+
+import useMap from '../../hooks/useMap';
+import Marker from './marker.svg';
 
 function Map({ points, room, isMapBig }: MapProps) {
 
@@ -55,9 +59,9 @@ function Map({ points, room, isMapBig }: MapProps) {
   return (
     <section
       className={cn(
+        'map',
         { 'property__map': isMapBig },
         { 'cities__map': !isMapBig },
-        'map'
       )}
       ref={mapRef}
     >

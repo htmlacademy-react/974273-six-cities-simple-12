@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
+
 import HeaderBody from '../header/header';
 
-function Layout() {
+function Layout(): JSX.Element {
   return (
     <>
       <HeaderBody />

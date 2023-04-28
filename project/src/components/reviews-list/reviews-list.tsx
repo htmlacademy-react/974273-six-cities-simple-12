@@ -1,5 +1,6 @@
 import { ReviewListProps } from '../../types/type-store';
 import { sortByMin } from '../../utils/utils';
+
 import Rewiew from '../review/review';
 
 function ReviewsList({ reviews }: ReviewListProps): JSX.Element {

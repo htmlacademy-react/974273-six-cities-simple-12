@@ -1,14 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
-import HistoryRouter from '../history-route/history-route';
 import { HelmetProvider } from 'react-helmet-async';
+
 import { AppRoute } from '../../data-store/data-variables';
+
+import HistoryRouter from '../history-route/history-route';
 import Main from '../../pages/main/main';
 import Room from '../../pages/room/room';
-import Error from '../../pages/error/error';
+import Error from '../../pages/errors/error';
 import Layout from '../layout/layout';
 import PrivateRoute from '../privet-route/privet-route';
 import browserHistory from '../../browser-history/browser-history';
-import NotFound from '../../pages/error/error_404';
+import NotFound from '../../pages/errors/error_404';
 
 function App(): JSX.Element {
 
@@ -25,13 +27,13 @@ function App(): JSX.Element {
               path={AppRoute.Room}
               element={<Room />}
             />
-            <Route
-              path={AppRoute.Login}
-              element={
-                <PrivateRoute />
-              }
-            />
           </Route>
+          <Route
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute />
+            }
+          />
           <Route
             path="*"
             element={<Error />}

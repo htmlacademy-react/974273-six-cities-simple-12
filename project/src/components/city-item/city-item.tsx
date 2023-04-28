@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
 import cn from 'classnames';
+
+import { useAppSelector } from '../../hooks/hook';
 import { CityItemProps } from '../../types/type-store';
 import { getCity } from '../../store/data-process/selectors';
 
-function CityItem({ city, clickCity }: CityItemProps) {
+function CityItem({ city, clickCity }: CityItemProps): JSX.Element {
 
   const cityChoose = useAppSelector(getCity);
 

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
-import SignIn from '../sign-in/sign-in';
-import { useAppSelector } from '../../hooks';
-import SignOut from '../sign-out/sign-out';
+
+import { useAppSelector } from '../../hooks/hook';
 import { AuthorizationStatus } from '../../data-store/data-variables';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+
+import SignIn from '../sign-in/sign-in';
+import SignOut from '../sign-out/sign-out';
 
 function HeaderBody(): JSX.Element {
 
