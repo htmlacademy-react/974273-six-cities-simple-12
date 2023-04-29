@@ -1,6 +1,6 @@
 import { ListRoomsProps } from '../../types/type-store';
 
-import Card from '../card/card';
+import Card from '../card-item/card-item';
 
 function CardList({ listRooms }: ListRoomsProps): JSX.Element {
 
