@@ -17,6 +17,10 @@ export type ResponseAuthorization = {
   token: string;
 }
 
+export type OfferId = {
+  arg: number;
+}
+
 export type AppMainBodyProps = {
   totalNumberOffers: number;
   rentListRoom: CardProps[];

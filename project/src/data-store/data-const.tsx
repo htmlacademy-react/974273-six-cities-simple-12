@@ -15,3 +15,5 @@ export const TIMEOUT_SHOW_ERROR = 5000;
 export const SORT_NAME = 'Popular';
 
 export const RATINGS = ['prefect', 'good', 'not bad', 'badly', 'terribly'];
+
+export const OPTIONS_SORTING = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];

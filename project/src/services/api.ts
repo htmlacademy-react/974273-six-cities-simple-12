@@ -44,7 +44,7 @@ export const createAPI = (): AxiosInstance => {
         switch (error.response.status) {
           case 400: processErrorHandle('Данные не верны или произошел сбой запроса. ПОВТОРИТЕ ПОПЫТКУ.');
             break;
-          case 404: store.dispatch(redirectToRoute(AppRoute.Error_404));
+          case 404: store.dispatch(redirectToRoute(AppRoute.Error));
             break;
           case 401: processErrorHandle('');
             break;

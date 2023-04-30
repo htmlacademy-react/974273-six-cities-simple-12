@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
+import { AuthorizationStatus } from '../../data-store/data-variables';
 import { useAppDispatch, useAppSelector } from '../../hooks/hook';
-import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
-import { redirectToRoute } from '../../store/actions';
-import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
+import { fetchHotelAction } from '../../store/api-actions';
+import { getComments, getOffer, getOffersNearby } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { roundUp } from '../../utils/utils';
 
@@ -19,45 +18,51 @@ import Map from '../../components/map/map';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Room(): JSX.Element {
-
+  const dispatch = useAppDispatch();
   const { id } = useParams() as { id: string };
-
-  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
+  const hotelId = Number(id);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  useEffect(() => {
+    if (!isNaN(hotelId)) {
+      // dispatch(fetchOfferByIdAction({ id: hotelId }));
+      // dispatch(fetchNearOffersAction({ id: hotelId }));
+      // dispatch(fetchReviewsAction({ id: hotelId }));
+      // dispatch(setActiveOfferId(null));
+      dispatch(fetchHotelAction({ arg: hotelId }));
+    }
+  }, [hotelId, dispatch]);
+
+  // const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
   const room = useAppSelector(getOffer);
   const comments = useAppSelector(getComments);
   const roomsNearby = useAppSelector(getOffersNearby);
-  const hotels = useAppSelector(getOffersCity);
-  const dispatch = useAppDispatch();
+  // const hotels = useAppSelector(getOffersCity);
 
-  useEffect(() => {
+  // if (isHotelDataLoading) {
+  //   return <LoadingScreen />;
+  // }
 
-    let isMounted = true;
+  // if (!room && isNaN(hotelId)) {
+  //   // dispatch(redirectToRoute(AppRoute.Error));
+  //   return <div>NotFoundPage</div>;
+  // }
 
-    if (isMounted) {
-      dispatch(fetchHotelsAction());
-      dispatch(fetchHotelAction(String(id)));
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [dispatch, id]);
-
-  if (isHotelDataLoading) {
-    return <LoadingScreen />;
-  }
+  // if (!room) {
+  //   return <div>NotFoundPage</div>;
+  // }
   if (!room) {
-    return <div>NotFoundPage</div>;
+    return <LoadingScreen />;
   }
 
   const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price, type } = room;
   const { avatarUrl, name, isPro } = host;
   const ratingProcent = roundUp(rating);
 
-  if (!hotels.find((item) => item.id === Number(id))) {
-    dispatch(redirectToRoute(AppRoute.Error_404));
-  }
+  // if (!hotels.find((item) => item.id === Number(id))) {
+  //   dispatch(redirectToRoute(AppRoute.Error));
+  // }
+
 
   return (
     <main className="page__main page__main--property">

@@ -15,20 +15,23 @@ function Main(): JSX.Element {
 
   const isHotelsDataLoading = useAppSelector(getIsHotelsDataLoading);
   const roomsCitiRend = useAppSelector(getOffersCity);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  console.log('Lo')
 
-    let isMounted = true;
+  // useEffect(() => {
 
-    if (isMounted) {
-      dispatch(fetchHotelsAction());
-    }
+  //   let isMounted = true;
 
-    return () => {
-      isMounted = false;
-    };
-  }, [dispatch]);
+  //   if (isMounted) {
+  //     console.log('запрос');
+  //     dispatch(fetchHotelsAction());
+  //   }
+
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, [dispatch]);
 
 
   if (isHotelsDataLoading) {
