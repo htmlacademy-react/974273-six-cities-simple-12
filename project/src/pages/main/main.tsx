@@ -1,9 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import { useEffect } from 'react';
 import cn from 'classnames';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hook';
-import { fetchHotelsAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks/hook';
 import { getIsHotelsDataLoading, getOffersCity } from '../../store/data-process/selectors';
 
 import MainEmpty from '../../components/main-empty/main-empty';
@@ -15,24 +13,6 @@ function Main(): JSX.Element {
 
   const isHotelsDataLoading = useAppSelector(getIsHotelsDataLoading);
   const roomsCitiRend = useAppSelector(getOffersCity);
-  // const dispatch = useAppDispatch();
-
-  console.log('Lo')
-
-  // useEffect(() => {
-
-  //   let isMounted = true;
-
-  //   if (isMounted) {
-  //     console.log('запрос');
-  //     dispatch(fetchHotelsAction());
-  //   }
-
-  //   return () => {
-  //     isMounted = false;
-  //   };
-  // }, [dispatch]);
-
 
   if (isHotelsDataLoading) {
     return <LoadingScreen />;

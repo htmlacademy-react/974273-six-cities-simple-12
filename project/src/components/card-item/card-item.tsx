@@ -7,7 +7,6 @@ import { changeColorMarker } from '../../store/main-process/main-process';
 import { roundUp } from '../../utils/utils';
 
 import Error from '../../pages/errors/error';
-// import { fetchHotelAction } from '../../store/api-actions';
 
 function Card({ dataRoom }: CardDataObject): JSX.Element {
 
@@ -28,17 +27,12 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
     return <Error />;
   }
 
-  // const handlerLinkClick = () => {
-  //   dispatch(fetchHotelAction(String(id)));
-  // };
-
   return (
     <article className="cities__card place-card" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} >
       {isPremium ? <div className="place-card__mark"><span>Premium</span></div> : ' '}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link
           to={`/offer/${id}`}
-        // onClick={handlerLinkClick}
         >
           <img className="place-card__image" src={images[0]} width="260" height="200" alt="Room" />
         </Link>
@@ -59,7 +53,6 @@ function Card({ dataRoom }: CardDataObject): JSX.Element {
         <h2 className="place-card__name">
           <Link
             to={`/offer/${id}`}
-          // onClick={handlerLinkClick}
           >
             {title}
           </Link>

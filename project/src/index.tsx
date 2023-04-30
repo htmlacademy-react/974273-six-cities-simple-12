@@ -16,10 +16,8 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ErrorMessage />
-      <App />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ErrorMessage />
+    <App />
+  </Provider>,
 );

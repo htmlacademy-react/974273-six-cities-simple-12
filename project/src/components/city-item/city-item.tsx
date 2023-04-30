@@ -16,7 +16,7 @@ function CityItem({ city, clickCity }: CityItemProps): JSX.Element {
     >
       <Link to={'/'} id={city} className={cn(
         'locations__item-link',
-        { 'tabs__item': city !== cityChoose },
+        'tabs__item',
         { 'tabs__item--active': city === cityChoose }
       )}
       >
