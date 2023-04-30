@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { NameSpace, optionsSorting } from '../../data-store/data-variables';
+import { NameSpace } from '../../data-store/data-variables';
 import { commentsAction, fetchHotelAction, fetchHotelsAction } from '../api-actions';
 import { DataProcess } from '../../types/state';
 import { Offers } from '../../types/type-store';
 import { sortByMax, sortByMin } from '../../utils/utils';
-import { SORT_NAME } from '../../data-store/data-const';
+import { OPTIONS_SORTING, SORT_NAME } from '../../data-store/data-const';
 
 const selectCity = (offers: Offers, city: string): Offers => (offers.filter((offer) => offer.city.name === city).slice());
 
@@ -41,7 +41,7 @@ export const dataProcess = createSlice({
     chooseOption: (state, action: PayloadAction<{ nameOption: string }>) => {
 
       const { nameOption } = action.payload;
-      const sortIndex = optionsSorting.findIndex((optionSorting) => optionSorting.includes(nameOption));
+      const sortIndex = OPTIONS_SORTING.findIndex((optionSorting) => optionSorting.includes(nameOption));
 
       state.sortName = nameOption;
 

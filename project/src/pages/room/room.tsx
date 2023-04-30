@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { AppRoute, AuthorizationStatus } from '../../data-store/data-variables';
+import { AuthorizationStatus } from '../../data-store/data-variables';
 import { useAppDispatch, useAppSelector } from '../../hooks/hook';
-import { fetchHotelAction, fetchHotelsAction } from '../../store/api-actions';
-import { redirectToRoute } from '../../store/actions';
-import { getComments, getIsHotelDataLoading, getOffer, getOffersCity, getOffersNearby } from '../../store/data-process/selectors';
+import { fetchHotelAction } from '../../store/api-actions';
+import { getComments, getIsHotelDataLoading, getOffer, getOffersNearby } from '../../store/data-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { roundUp } from '../../utils/utils';
 
@@ -20,44 +19,43 @@ import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Room(): JSX.Element {
 
-  const { id } = useParams() as { id: string };
-
-  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const room = useAppSelector(getOffer);
-  const comments = useAppSelector(getComments);
-  const roomsNearby = useAppSelector(getOffersNearby);
-  const hotels = useAppSelector(getOffersCity);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  const { id } = useParams() as { id: string };
+  const hotelId = Number(id);
 
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isHotelDataLoading = useAppSelector(getIsHotelDataLoading);
+
+  useEffect(() => {
     let isMounted = true;
 
     if (isMounted) {
-      dispatch(fetchHotelsAction());
-      dispatch(fetchHotelAction(String(id)));
+      if (!isNaN(hotelId)) {
+        dispatch(fetchHotelAction({ arg: hotelId }));
+      }
     }
 
     return () => {
       isMounted = false;
     };
-  }, [dispatch, id]);
+  }, [hotelId, dispatch]);
+
+  const room = useAppSelector(getOffer);
+  const comments = useAppSelector(getComments);
+  const roomsNearby = useAppSelector(getOffersNearby);
 
   if (isHotelDataLoading) {
     return <LoadingScreen />;
   }
+
   if (!room) {
-    return <div>NotFoundPage</div>;
+    return <div>Not Found Page</div>;
   }
 
   const { images, goods, host, isPremium, title, rating, bedrooms, maxAdults, description, price, type } = room;
   const { avatarUrl, name, isPro } = host;
   const ratingProcent = roundUp(rating);
-
-  if (!hotels.find((item) => item.id === Number(id))) {
-    dispatch(redirectToRoute(AppRoute.Error_404));
-  }
 
   return (
     <main className="page__main page__main--property">

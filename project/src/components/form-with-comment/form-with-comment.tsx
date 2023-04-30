@@ -16,7 +16,6 @@ function FormWithComment(): JSX.Element {
   const isDisabledSending = useAppSelector(getIsSendingComment);
   const clearingForm = useAppSelector(getClearing);
   const formRef = useRef<HTMLFormElement | null>(null);
-  // const inputRef = useRef<HTMLInputElement | null>(null);
   const { id } = useParams<Params>();
 
   const [dataForm, setDataForm] = useState({

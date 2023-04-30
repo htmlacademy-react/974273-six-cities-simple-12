@@ -39,7 +39,7 @@ function App(): JSX.Element {
             element={<Error />}
           />
           <Route
-            path={AppRoute.Error_404}
+            path={AppRoute.Error}
             element={<NotFound />}
           />
         </Routes>

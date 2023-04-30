@@ -1,10 +1,8 @@
 export enum AppRoute {
 	Main = '/',
-	Room = 'offer/:id',
-	Login = 'login',
-	PrivateOffice = 'private',
-	NoPlace = 'no-place',
-	Error_404 = 'error/404'
+	Room = '/offer/:id',
+	Login = '/login',
+	Error = '/error/404',
 }
 
 export enum AuthorizationStatus {
@@ -12,8 +10,6 @@ export enum AuthorizationStatus {
 	NoAuth = 'NoAuth',
 	Unknown = 'Unknown',
 }
-
-export const optionsSorting = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 export enum APIRoute {
 	Hotels = '/hotels',
@@ -23,7 +19,7 @@ export enum APIRoute {
 }
 
 export enum NameSpace {
-	Data = 'DATA',
-	Main = 'MAIN',
-	User = 'USER',
+	Data = 'Data',
+	Main = 'Main',
+	User = 'User',
 }
